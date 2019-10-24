@@ -55,7 +55,7 @@ export const register = ({ tenNguoiDung,email,matKhauDangNhap,sdt }) => dispatch
 
     const body = JSON.stringify({ tenNguoiDung,email,matKhauDangNhap,sdt });
 
-    axios.post('http://localhost:8000/api/move/user/register', body, config)
+    axios.post('/api/move/user/register', body, config)
     .then(res => dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data

@@ -1,0 +1,5 @@
+{
+    "mongoUrlDat": "mongodb+srv://kinomato005:9783394@move-llu9a.gcp.mongodb.net/test2?retryWrites=true&w=majority",
+    "mongoUrlKy": "mongodb+srv://dat:trantienwon@testmongo-intg9.mongodb.net/grabExpress?retryWrites=true&w=majority",
+    "jwtSecret": "wazamove_myJwtSecret"
+}

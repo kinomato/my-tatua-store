@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import uuid from 'uuid';
 import { connect } from 'react-redux';
-import { addItem } from '../../actions/test/itemAction';
+
 import { Modal, Button, Form, Nav, Alert } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/authAction'

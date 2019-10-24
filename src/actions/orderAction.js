@@ -6,7 +6,7 @@ import {
     ADD_ORDER,
     DELETE_ORDER,
     // GET_ERRORS,
-    GET_ORDERS_FAIL,
+    // GET_ORDERS_FAIL,
     GET_ORDER_FAIL,
     ORDERS_LOADING,
     GET_ORDER,

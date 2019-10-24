@@ -9,11 +9,15 @@ const UserSchema = schema({
         type: String,
         require: true
     },
-    userAdress: {
+    userAddress: {
         type: String,
         require: true
     },
-    userGenre: {
+    userGender: {
+        type: String,
+        require: true
+    },
+    userEmail:{
         type: String,
         require: true
     },

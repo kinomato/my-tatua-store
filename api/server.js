@@ -10,10 +10,10 @@ const cors = require('cors')
 const mongoose = require('mongoose');
 
 // model
-// const auth = require('./modules/auth');
+const auth = require('./modules/auth');
 // const order = require('./modules/order-module');
 // const promo = require('./modules/promo-module');
-// const user = require('./modules/user-module');
+const user = require('./modules/user-module');
 // const driver = require('./modules/driver-module');
 // const paytype = require('./modules/paytype-module');
 
@@ -22,7 +22,7 @@ const dbdat = config.get('mongoUrlDat');
 const dbky = config.get('mongoUrlKy');
 
 // connect DB
-mongoose.connect(dbky,
+mongoose.connect(dbdat,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -41,8 +41,8 @@ app.use(bodyParser.json());
 
 // app.use('/api/move/order', order); // ('api/order') => sai
 // app.use('/api/move/promo', promo);
-// app.use('/api/move/user', user);
-// app.use('/api/move/auth', auth);
+app.use('/api/move/user', user);
+app.use('/api/move/auth', auth);
 // app.use('/api/move/driver', driver);
 // app.use('/api/move/paytype', paytype);
 
