@@ -7,6 +7,10 @@ const ProductSchema = schema({
         type: String,
         require: true
     },
+    prodURL:{
+        type:String,
+        require:true
+    },
     toppStatus: {
         type: Boolean,
         defaut: false
