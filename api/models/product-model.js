@@ -12,8 +12,14 @@ const Product = schema({
         defaut: false
     },
     topp: {
-        type: schema.Types.ObjectId,
-        ref: 'topping'
+        toppName: {
+            type: String,
+            require:true
+        },
+        toppPrize:{
+            type:String,
+            require:true
+        }
     },
     prodPrize: {
         type: String,

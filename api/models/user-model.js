@@ -9,6 +9,10 @@ const User = schema({
         type: String,
         require: true
     },
+    userEmail:{
+        type:String,
+        require:true
+    },
     userAdress: {
         type: String,
         require: true
