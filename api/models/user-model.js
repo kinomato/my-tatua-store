@@ -32,7 +32,13 @@ const User = schema({
     priority: {
         type: Number,
         require: true
-    }
+    },
+    orders:[
+        {
+            type:schema.Types.ObjectId,
+            ref:'order'
+        }
+    ]
 })
 
 const User = mongoose.model('User', User, 'user')
