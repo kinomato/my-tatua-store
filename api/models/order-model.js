@@ -18,6 +18,14 @@ const OrderSchema = new schema({
     product: {
         type: schema.Types.ObjectId,
         ref: 'product'
+    },
+    prizeOrigin:{
+        type:String,
+        require:true
+    },
+    prizeWithPromo:{
+        type:String,
+        require:true
     }
 
 })
