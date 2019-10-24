@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Promo= new Schema({
+const PromoSchema= new Schema({
     
     promo:  {
         type: String,
@@ -23,5 +23,5 @@ const Promo= new Schema({
         default: false
     },
 })
-const Promo = mongoose.model('Promo',Promo,'promo');
+const Promo = mongoose.model('Promo',PromoSchema,'promo');
 module.exports = Promo;

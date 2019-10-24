@@ -5,6 +5,8 @@ import store from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import NavigationBar from './components/navbar';
+import PrivateRoute from './components/privateRoute';
+import MainContent from './components/mainContent';
 
 import { loadUser } from './actions/authAction';
 import { Route, Switch } from 'react-router-dom';
@@ -18,7 +20,19 @@ class App extends Component {
       <Provider store={store}>
             <div className="App">
               <Container fluid={true}>
+                <NavigationBar/>
                 <Row>
+                  <Col>
+                  <Switch>
+                          <Route exact path="/" redirect Component={MainContent} />
+                          {/* <Route path="/test/shoppinglist" component={ShoppingList} />
+                          <Route path="/forbidden" component={AccessDenied} /> */}
+                         
+                          {/* <PrivateRoute path="/admin/orders/:id" component={OrderDetail}/>
+                          <PrivateRoute path="/admin/orders" component={Order}/>
+                          <PrivateRoute path="/admin/dashboard" component={Dashboard}/> */}
+                        </Switch>
+                        </Col>
                   {/* <Col className="sticky-top" sm={2} style={{ height:"100vh"}}>
                     
                       
@@ -33,15 +47,7 @@ class App extends Component {
                     </Row>
                     <Row>
                       <Col>
-                        <Switch>
-                          
-                          <Route path="/test/shoppinglist" component={ShoppingList} />
-                          <Route path="/forbidden" component={AccessDenied} />
-                         
-                          <PrivateRoute path="/admin/orders/:id" component={OrderDetail}/>
-                          <PrivateRoute path="/admin/orders" component={Order}/>
-                          <PrivateRoute path="/admin/dashboard" component={Dashboard}/>
-                        </Switch>
+                        
                       </Col>
                     </Row>
                   </Col> */}

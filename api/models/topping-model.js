@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
-const Topping = schema({
+const ToppingSchema = schema({
     _id:{type:String},
     toppName:{
         type:String,
@@ -16,3 +16,5 @@ const Topping = schema({
         require:true
     }
 })
+const Topping = mongoose.model('Topping',ToppingSchema,'topping');
+module.exports = Topping;
