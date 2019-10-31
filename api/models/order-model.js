@@ -19,6 +19,16 @@ const OrderSchema = new schema({
         type: schema.Types.ObjectId,
         ref: 'product'
     },
+    topp: {
+        toppName: {
+            type: String,
+            require:true
+        },
+        toppPrize:{
+            type:String,
+            require:true
+        }
+    },
     prizeOrigin:{
         type:String,
         require:true

@@ -7,28 +7,29 @@ const ProductSchema = schema({
         type: String,
         require: true
     },
-    prodURL:{
-        type:String,
-        require:true
+    prodPrize: {
+        type: String,
+        require: true
     },
-    toppStatus: {
-        type: Boolean,
-        defaut: false
+    prodURL: {
+        type: String,
+        require: true
     },
     topp: {
         toppName: {
             type: String,
-            require:true
+            require: true
         },
-        toppPrize:{
-            type:String,
-            require:true
+        toppPrize: {
+            type: String,
+            require: true
         }
     },
-    prodPrize: {
-        type: String,
-        require: true
+    isDeleted: {
+        type: Boolean,
+        default: false
     }
+
 })
 
 const Product = mongoose.model('Product', ProductSchema, 'product')
