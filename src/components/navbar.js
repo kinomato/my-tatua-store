@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 import RegisterModal from './auth/register';
 import Logout from './auth/logout';
 import Login from './auth/login';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 class NavigationBar extends Component {
     static propTypes = {
         isAuthenticated: PropTypes.bool,
@@ -50,7 +50,21 @@ class NavigationBar extends Component {
                             <Nav.Link >
                                 <Link to="/content">Home</Link>
                             </Nav.Link>
-                            <Nav.Link href="#link">Link</Nav.Link>
+                            {/* <Nav.Link href="">Manage</Nav.Link> */}
+                            <Dropdown>
+                                <Dropdown.Toggle id="dropdown-basic">
+                                    Manage
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="#/action-1">Manage User</Dropdown.Item>
+                                    <Dropdown.Item href="/productList">Manage Product</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-3">Manage Topping</Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item href="#/action-3">About</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-3">Help</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </Nav>
 
                         <Nav className="ml-auto">

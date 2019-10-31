@@ -5,7 +5,7 @@ import store from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import NavigationBar from './components/navbar';
-import PrivateRoute from './components/privateRoute';
+// import PrivateRoute from './components/privateRoute';
 import MainContent from './components/mainContent';
 import AccessDenied from './components/accessDenied';
 
@@ -13,6 +13,7 @@ import { loadUser } from './actions/authAction';
 import { Route, Switch } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { StickyContainer, Sticky } from 'react-sticky';
+import ProductList from './components/product/productList';
 
 class App extends Component {
   render() {
@@ -20,13 +21,11 @@ class App extends Component {
 
       <Provider store={store}>
         <div className="App">
-          <Container fluid={true}>
             <NavigationBar />
-            <Row>
-              <Col>
               
                 <Switch>
                   <Route path="/content" component={MainContent} />
+                  <Route path="/productList" component={ProductList} />
                   {/* <Route path="/test/shoppinglist" component={ShoppingList} /> */}
                           <Route path="/forbidden" component={AccessDenied} />
 
@@ -34,7 +33,7 @@ class App extends Component {
                           <PrivateRoute path="/admin/orders" component={Order}/>
                           <PrivateRoute path="/admin/dashboard" component={Dashboard}/> */}
                 </Switch>
-              </Col>
+              {/* </Col> */}
               {/* <Col className="sticky-top" sm={2} style={{ height:"100vh"}}>
                     
                       
@@ -53,8 +52,8 @@ class App extends Component {
                       </Col>
                     </Row>
                   </Col> */}
-            </Row>
-          </Container>
+            {/* </Row> */}
+          {/* </Container> */}
 
 
 

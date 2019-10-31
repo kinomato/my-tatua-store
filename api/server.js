@@ -11,18 +11,15 @@ const mongoose = require('mongoose');
 
 // model
 const auth = require('./modules/auth');
-// const order = require('./modules/order-module');
-// const promo = require('./modules/promo-module');
 const user = require('./modules/user-module');
-// const driver = require('./modules/driver-module');
-// const paytype = require('./modules/paytype-module');
+const product =require('./modules/product-module');
 
 // const mongoClient = require('mongodb').MongoClient;
 const dbdat = config.get('mongoUrlDat');
 const dbky = config.get('mongoUrlKy');
 
 // connect DB
-mongoose.connect(dbdat,
+mongoose.connect(dbky,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -43,6 +40,7 @@ app.use(bodyParser.json());
 // app.use('/api/move/promo', promo);
 app.use('/api/move/user', user);
 app.use('/api/move/auth', auth);
+app.use('/api/move/product',product);
 // app.use('/api/move/driver', driver);
 // app.use('/api/move/paytype', paytype);
 
