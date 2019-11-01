@@ -16,6 +16,9 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import ProductList from './components/product/productList';
 
 class App extends Component {
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
   render() {
     return (
 
@@ -27,7 +30,7 @@ class App extends Component {
                   <Route path="/content" component={MainContent} />
                   <Route path="/productList" component={ProductList} />
                   {/* <Route path="/test/shoppinglist" component={ShoppingList} /> */}
-                          <Route path="/forbidden" component={AccessDenied} />
+                  <Route path="/forbidden" component={AccessDenied} />
 
                   {/* <PrivateRoute path="/admin/orders/:id" component={OrderDetail}/>
                           <PrivateRoute path="/admin/orders" component={Order}/>
