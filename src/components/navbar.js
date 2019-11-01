@@ -46,7 +46,7 @@ class NavigationBar extends Component {
                 </Dropdown>
                 <Nav.Link>
                     <span className="mr-3">
-                        <strong>{this.props.user ? `Welcome ${this.props.user.tenNguoiDung}` : ''}</strong>
+                        <strong>{this.props.user ? `Welcome ${this.props.user.userName}` : ''}</strong>
                     </span>
                 </Nav.Link>
                 <Nav.Item>
