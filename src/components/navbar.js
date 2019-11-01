@@ -30,6 +30,20 @@ class NavigationBar extends Component {
         )
         const authLinks = (
             <Fragment>
+                <Dropdown>
+                    <Dropdown.Toggle id="dropdown-basic">
+                        Manage
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item href="#/action-1">Manage User</Dropdown.Item>
+                        <Dropdown.Item href="/productList">Manage Product</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">Manage Topping</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item href="#/action-3">About</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">Help</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
                 <Nav.Link>
                     <span className="mr-3">
                         <strong>{this.props.user ? `Welcome ${this.props.user.tenNguoiDung}` : ''}</strong>
@@ -38,6 +52,7 @@ class NavigationBar extends Component {
                 <Nav.Item>
                     <Logout />
                 </Nav.Item>
+
             </Fragment>
         )
         return (
@@ -51,20 +66,7 @@ class NavigationBar extends Component {
                                 <Link to="/content">Home</Link>
                             </Nav.Link>
                             {/* <Nav.Link href="">Manage</Nav.Link> */}
-                            <Dropdown>
-                                <Dropdown.Toggle id="dropdown-basic">
-                                    Manage
-                                </Dropdown.Toggle>
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Manage User</Dropdown.Item>
-                                    <Dropdown.Item href="/productList">Manage Product</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Manage Topping</Dropdown.Item>
-                                    <Dropdown.Divider />
-                                    <Dropdown.Item href="#/action-3">About</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Help</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
                         </Nav>
 
                         <Nav className="ml-auto">

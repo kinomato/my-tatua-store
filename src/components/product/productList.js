@@ -1,14 +1,20 @@
-import React, { Component,Fragment } from 'react'
-import {Link} from 'react-router-dom'
-import { Container, Card, Button,Table,ButtonGroup } from 'react-bootstrap'
+import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
+import { Container, Card, Button, Table, ButtonGroup } from 'react-bootstrap'
 import { HashLoader, BarLoader, BeatLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import {getProducts} from '../../actions/productAction';
+import { getProducts } from '../../actions/productAction';
 
-export default class ProductList extends Component {
+class ProductList extends Component {
 
+    static propTypes = {
+        products: PropTypes.array.isRequired,
+        getProducts: PropTypes.func.isRequired,
+        loading: PropTypes.bool.isRequired,
+        error: PropTypes.object.isRequired
+    }
     componentDidMount() {
         this.props.getProducts();
     }
@@ -26,19 +32,18 @@ export default class ProductList extends Component {
         )
         const loaded = (
             <Fragment>
-                {products.map(product => {
-                    const { prodName, prodPrize, toppName, toppPrize, isDeleted } = product;
+                {products !== null ? products.map(product => {
+                    const { _id, prodName, prodPrize, toppName, toppPrize, isDeleted } = product;
 
                     return (
                         <tr>
+                            <td>{1}</td>
+                            <td>{_id}</td>
                             <td>{prodName}</td>
                             <td>{prodPrize}</td>
-                            <td>{isDeleted ? 'Hủy' : 'Tốt'}</td>
-                            <td>{prodPrize}</td>
-                            <td>{toppName}</td>
-                            <td>{toppPrize}</td>
-                            <td>
+                            <td>{isDeleted ? 'Unvailable' : 'Available'}</td>
 
+                            <td>
                                 <ButtonGroup aria-label="Basic example">
                                     <Button variant="secondary">Detail</Button>
                                     <Button variant="danger">Del</Button>
@@ -49,7 +54,7 @@ export default class ProductList extends Component {
 
                         </tr>
                     )
-                })}
+                }) : null}
             </Fragment>
         )
         return (
@@ -62,7 +67,7 @@ export default class ProductList extends Component {
                                 <th>ID</th>
                                 <th>Product Name</th>
                                 <th>Product prize (VND)</th>
-                                X
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,9 +88,7 @@ export default class ProductList extends Component {
                                 <td colSpan="2">Larry the Bird</td>
                                 <td>@twitter</td>
                             </tr> */}
-                            <tr>
-
-                            </tr>
+                            {!this.props.loading ? loaded : loading}
                         </tbody>
                     </Table>
 
@@ -98,3 +101,9 @@ export default class ProductList extends Component {
         )
     }
 }
+const mapStateToProps = state => ({
+    products: state.product.products,
+    loading: state.product.loading,
+    error: state.error
+})
+export default connect(mapStateToProps, { getProducts })(ProductList)
