@@ -37,8 +37,8 @@ class ProductList extends Component {
 
                     return (
                         <tr>
-                            <td>{1}</td>
-                            <td>{_id}</td>
+                            {/* <td>{1}</td>
+                            <td>{_id}</td> */}
                             <td>{prodName}</td>
                             <td>{prodPrize}</td>
                             <td>{isDeleted ? 'Unvailable' : 'Available'}</td>
@@ -63,8 +63,8 @@ class ProductList extends Component {
                     <Table striped bordered hover variant="dark">
                         <thead>
                             <tr>
-                                <th>STT</th>
-                                <th>ID</th>
+                                {/* <th>STT</th>
+                                <th>ID</th> */}
                                 <th>Product Name</th>
                                 <th>Product prize (VND)</th>
                                 <th>Status</th>
