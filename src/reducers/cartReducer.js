@@ -4,14 +4,15 @@ import {
     GET_ITEM_CART,
     GET_ITEM_CART_ERROR,
     INCR_ITEM_CART,
-    CALCULATE_TONGTIEN
+    CALCULATE_TONGTIEN,
+    INCREMENT,
+    DECREMENT
 } from '../actions/types';
 
 const initialState = {
     localcart: localStorage.getItem('cart'),
     cart: [],
-    item: null,
-    tongtien: 0
+    tongtien: 0,
 }
 
 export default function (state = initialState, action) {
@@ -20,13 +21,13 @@ export default function (state = initialState, action) {
             // localStorage.setItem('cart', [...state.cart, action.payload])
             return {
                 ...state,
-                cart: [action.payload, ...state.cart]
+                cart: [...action.payload]
             }
         case DELETE_ITEM_CART:
-            localStorage.setItem('cart', state.cart.filter(item => item.id !== action.payload))
+            // localStorage.setItem('cart', state.cart.filter(item => item.id !== action.payload))
             return {
                 ...state,
-                cart: state.cart.filter(item => item.id !== action.payload)
+                cart: [...action.payload]
             }
         case INCR_ITEM_CART:
             return {
@@ -37,6 +38,16 @@ export default function (state = initialState, action) {
             return {
                 ...state
             }
+        case INCREMENT:
+            return {
+                ...state,
+                cart: [...action.payload]
+            }
+        case DECREMENT:
+                return {
+                    ...state,
+                    cart: [...action.payload]
+                }
         case CALCULATE_TONGTIEN:
             return {
                 ...state,

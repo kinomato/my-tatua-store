@@ -28,14 +28,8 @@ class MainContent extends Component {
 
                     </Col>
                     <Col>
-                        <Card className="sticky-top">
-                            <Card.Header>Giỏ hàng</Card.Header>
-                            <div style={{ maxHeight: '50vh', overflowY: "scroll" }}>
-                            <Cart/>
-                            </div>
-                                
-                            
-                        </Card>
+                        <Cart/>
+                        
                     </Col>
                 </Row>
 

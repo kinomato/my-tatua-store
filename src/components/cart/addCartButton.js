@@ -21,19 +21,24 @@ class AddCartButton extends Component {
         this.setState({
             localcart: cart
         })
-        console.log(product);
-        localcart.forEach(item => {
+         console.log(localcart);
+        cart.forEach(item => {
             if(item.product._id===product._id)
             {
                 const newitem = {...item, sl: item.sl++}
                 item = newitem;
-                console.log(localcart);
+                // console.log(localcart);
                 temp = true;
-                return this.props.incrCartItem(localcart);
+                return this.props.incrCartItem(cart);
+                
             }
         });
-        if(!temp)
-        this.props.addCartItem({id:uuid(),product,sl:1})
+        if(!temp) {
+            const newitem = {id:uuid(),product,sl:1};
+            this.props.addCartItem(newitem,cart);
+            
+        }
+        
         
     }
     
@@ -45,20 +50,25 @@ class AddCartButton extends Component {
     //     })
     //     this.props.calculate(this.state.localcart)
     // }
-    componentDidUpdate(prevProps) {
-        const {cart} = this.props;
-        if(cart !== prevProps.cart) {
-            // kiem tra registor error
-            this.setState({
-                localcart: cart
-            })
-            this.props.calculate(this.state.localcart)
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     const {cart} = this.props;
+    //     if( cart.length !== prevProps.cart.length) {
+    //         // kiem tra registor error
+    //         this.setState({
+    //             localcart: cart
+    //         })
+            
+    //     }
+    // }
+    // componentWillReceiveProps(nextProps) {
+    //     this.setState({
+    //         localcart: nextProps.cart
+    //     })
+    // }
     render() {
         const { product } = this.props;
         return (
-            <Button variant="outline-primary" onClick={() =>this.CheckDuplicate(product)}>Đặt</Button>
+            <Button block variant="outline-primary" onClick={() =>this.CheckDuplicate(product)}>Đặt</Button>
         )
     }
     

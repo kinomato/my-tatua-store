@@ -5,6 +5,8 @@ export const GET_ITEM_CART = "GET_ITEM_CART";
 export const GET_ITEM_CART_ERROR = "GET_ITEM_CART_ERROR";
 export const INCR_ITEM_CART = "INCR_ITEM_CART";
 export const CALCULATE_TONGTIEN = "CALCULATE_TONGTIEN";
+export const INCREMENT = "INCREMENT";
+export const DECREMENT = "DECREMENT"
 // USER
 export const GET_USERS = "GET_USERS";
 export const GET_USER = "GET_USER";

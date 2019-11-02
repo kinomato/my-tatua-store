@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getCartItems, deleteCartItem } from '../../actions/cartAction';
-import { ListGroup, Button, ListGroupItem } from 'react-bootstrap'
+import DeleteCartButton from './deleteCartButton';
+import { ListGroup, Button, Card } from 'react-bootstrap'
+import IncrementBtn from './incrementBtn';
+import DecrementBtn from './decrementBtn';
 
 export class Cart extends Component {
     static propTypes = {
@@ -18,46 +21,63 @@ export class Cart extends Component {
         const { cart } = this.props;
         if (cart.length > 0) {
             return (
-                <div>
-                    <ListGroup>
-                        <ListGroup.Item>
-                            <div className="d-flex flex-row justify-content-between">
-                                <small>Tong tien: {this.props.tongtien}</small>
-                            </div>
-                        </ListGroup.Item>
-                        {cart.map(item => {
-                            return (
+                <Card className="sticky-top">
+                    <Card.Header>Giỏ hàng</Card.Header>
+                    <div style={{ maxHeight: '70vh', overflowY: "scroll" }}>
+                        <ListGroup>
+                            <ListGroup.Item>
+                                <div className="d-flex flex-row justify-content-between">
+                                    <small>Tổng tiền: $ {this.props.tongtien}</small>
+                                </div>
+                            </ListGroup.Item>
+                            {cart.map(item => {
+                                return (
 
 
-                                <ListGroup.Item>
-                                    <div className="d-flex flex-row justify-content-between">
-                                        <div className="d-flex flex-column float-left">
-                                            <small>{item.product.prodName}</small>
+                                    <ListGroup.Item>
+                                        <div className="d-flex flex-row justify-content-between">
+                                            <div className="d-flex flex-column ">
+                                                <small>{item.product.prodName}</small>
+                                                <div className="d-flex flex-row justify-content-between">
+                                                    <IncrementBtn id={item.id} />
+                                                    <small>{item.sl}</small>
+                                                    <DecrementBtn id={item.id}/>
+                                                </div>
+
+
+                                                {/* <Button variant="outline-danger">del</Button> */}
+                                            </div>
                                             <small>{item.product.prodPrize}</small>
-                                            <small>{item.sl}</small>
-
-                                            {/* <Button variant="outline-danger">del</Button> */}
+                                            <DeleteCartButton id={item.id} />
+                                            {/* <Button variant="danger" onClick={() => this.props.deleteCartItem(item.id)}>x</Button> */}
                                         </div>
-                                        <Button variant="danger" onClick={() => this.props.deleteCartItem(item.id)}>x</Button>
-                                    </div>
 
 
-                                </ListGroup.Item>
+                                    </ListGroup.Item>
 
 
 
-                            )
+                                )
 
-                        })}
-                    </ListGroup>
-                </div>
+                            })}
+                        </ListGroup>
+                    </div>
 
+                    <Button variant="outline-success">Thanh toán</Button>
+                </Card>
             )
         } else {
             return (
-                <div>
-                    hello
-                </div>
+                <Card className="sticky-top">
+                    <Card.Header>Giỏ hàng</Card.Header>
+                    <div style={{ maxHeight: '70vh', overflowY: "scroll" }}>
+
+                        Đặt hàng đi bạn
+                            </div>
+
+
+                </Card>
+
             )
         }
 

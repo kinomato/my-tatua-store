@@ -28,7 +28,7 @@ class Products extends Component {
                         const { _id, prodName, prodURL, prodPrize, isDeleted } = product;
                         return (
                             <Col style ={{marginBottom:"2rem"}}>
-                                <Card style={{ height:"100%", width: '15rem' }}>
+                                <Card key={_id} style={{ height:"100%", width: '15rem' }}>
                                     <Card.Img variant="top" src={prodURL} style={{height:'10rem'}} />
                                     <Card.Body>
                                         <Card.Title>{prodName}</Card.Title>

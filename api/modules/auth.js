@@ -61,8 +61,8 @@ router.post('/login', (req, res) => {
                             token,
                             user: {
                                 id: user.id,
-                                tenNguoiDung: user.tenNguoiDung,
-                                email: user.email,
+                                tenNguoiDung: user.userName,
+                                email: user.userEmail,
                                 priority: user.priority
                             }
                         })
