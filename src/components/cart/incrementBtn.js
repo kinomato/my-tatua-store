@@ -9,10 +9,11 @@ export class IncrementBtn extends Component {
         prop: PropTypes
     }
     handleClick = () => {
-        const { cart, item } = this.props;
-        this.props.increment(cart, item);
+        const { cart, id } = this.props;
+        this.props.increment(id,cart);
     }
     render() {
+        
         return (
             <IconContext.Provider value={{ color: "blue" }}>
                 <div>

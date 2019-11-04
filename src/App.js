@@ -25,7 +25,7 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
             <NavigationBar />
-              <Container style={{marginTop:"1rem"}}>
+              <Container fluid={true} style={{marginTop:"1rem"}}>
               <Switch>
                   <Redirect exact from="/" to="/home"/>
                   <Route path="/home" component={MainContent} />

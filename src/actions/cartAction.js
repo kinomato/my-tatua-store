@@ -58,15 +58,27 @@ export const increment = (id,cart) => dispatch => {
 }
 export const decrement = (id,cart) => dispatch => {
     const newcart = cart;
+    let zero = false;
     newcart.forEach(item => {
         if(item.id === id)
-        return item.sl--;
+        {
+            if(item.sl === 1)
+            zero = true;
+            return item.sl--;
+        }
     });
-    dispatch(calculate(newcart))
-    dispatch({
-        type: DECREMENT,
-        payload: newcart
-    })
+    
+    if(zero) {
+        dispatch(deleteCartItem(id,cart))
+    }
+    else {
+        dispatch(calculate(newcart))
+        dispatch({
+            type: DECREMENT,
+            payload: newcart
+        })
+    }
+    
 }
 export const calculate = (cart) => dispatch => {
     let money = 0;

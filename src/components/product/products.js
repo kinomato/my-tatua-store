@@ -3,23 +3,30 @@ import { Row, Col, Card, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getProducts } from '../../actions/productAction';
+import { getToppings } from '../../actions/toppingAction';
 import AddCartButton from '../cart/addCartButton';
 
 import PropTypes from 'prop-types';
+import '../../css/textslide.css';
+
+import ProtopModal from './protopModal'
 class Products extends Component {
     static propTypes = {
         products: PropTypes.array.isRequired,
         getProducts: PropTypes.func.isRequired,
+        getToppings: PropTypes.func.isRequired,
         loading: PropTypes.bool.isRequired,
         error: PropTypes.object.isRequired
     }
     componentDidMount() {
         this.props.getProducts();
+        this.props.getToppings();
     }
     handleOnclick(item) {
         console.log(item);
     }
     render() {
+        const slidestyle = {}
         const { products } = this.props;
         return (
             <div>
@@ -27,16 +34,22 @@ class Products extends Component {
                     {products.map(product => {
                         const { _id, prodName, prodURL, prodPrize, isDeleted } = product;
                         return (
-                            <Col style ={{marginBottom:"2rem"}}>
-                                <Card key={_id} style={{ height:"100%", width: '15rem' }}>
-                                    <Card.Img variant="top" src={prodURL} style={{height:'10rem'}} />
+                            <Col style={{ marginBottom: "2rem" }}>
+                                <Card key={_id} style={{ height: "100%", width: '15rem' }}>
+                                    <Card.Img variant="top" src={prodURL} style={{ height: '10rem' }} />
                                     <Card.Body>
-                                        <Card.Title>{prodName}</Card.Title>
+                                        <Card.Title style={{overflowInline:"hidden"}}>
+                                            {/* <div className="textslide" style={{overflowInline:"hidden"}}>
+                                                {prodName}
+                                            </div> */}
+                                            {prodName}
+                                        </Card.Title>
                                         <Card.Text>
                                             {prodPrize}
                                         </Card.Text>
                                         {/* <Button variant="primary" onClick={(product)=> this.handleOnclick(product)} block>Chọn</Button> */}
-                                        <AddCartButton product={product}/>
+                                        {/* <AddCartButton product={product} /> */}
+                                        <ProtopModal product = {product}/>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -54,4 +67,4 @@ const mapStateToProps = state => ({
     loading: state.product.loading,
     error: state.error
 })
-export default connect(mapStateToProps, { getProducts })(Products)
+export default connect(mapStateToProps, { getProducts, getToppings })(Products)

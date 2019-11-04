@@ -20,9 +20,12 @@ export class DeleteCartButton extends Component {
             <div>
                 
                 <IconContext.Provider value={{ color: "red"  }}>
-                    <div>
-                    <IoIosCloseCircleOutline variant="danger" onClick={() => this.handleClick()} />
-                    </div>
+                    
+                        <div>
+                        <IoIosCloseCircleOutline  variant="danger" onClick={() => this.handleClick()} />
+                        </div>
+                    
+                    
                 </IconContext.Provider>
             </div>
         )

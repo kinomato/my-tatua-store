@@ -10,9 +10,8 @@ export class DecrementBtn extends Component {
         prop: PropTypes
     }
     handleClick = () => {
-        const { cart, item } = this.props;
-        console.log('decrement ' +  cart);
-        this.props.decrement(cart, item);
+        const { cart, id } = this.props;
+        this.props.decrement(id,cart);
     }
     render() {
         return (

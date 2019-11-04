@@ -3,17 +3,17 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 
-const Topp = require('../models/topping-model');
+const Topping = require('../models/topping-model');
 // const User = mongoose.Schema("User")
 // @route POST api/users/register
 // @descr dang ky
 // @access public
 // lấy tổng số document user
 router.get("/", (req, res) => {
-    Topp.find({},(err,res) => {
+    Topping.find({},(err,data) => {
         if(err)
         return res.status(400).json({msg:`lỗi ${err}`});
-        res.json(res);
+        res.json(data);
     })
 })
 //get user's info
