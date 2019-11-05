@@ -20,7 +20,7 @@ class MainContent extends Component {
                 <Row>
                     <Col sm={9}>
                         <Card>
-                            <Card.Header>Featured</Card.Header>
+                            <Card.Header>Trà sữa</Card.Header>
                             <Card.Body>
                                 <Products />
                             </Card.Body>

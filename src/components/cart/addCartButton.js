@@ -15,7 +15,7 @@ class AddCartButton extends Component {
     }
 
     CheckDuplicate = (data) => {
-        let isduplicate = true;
+        let isduplicate = false;
         const { cart } = this.props;
         const { localcart } = this.state;
         this.setState({
@@ -24,29 +24,28 @@ class AddCartButton extends Component {
         //  console.log(this.props.kiboi);
         cart.forEach(item => {
             if (item.product._id === data.product._id) {
+                isduplicate = true;
+                if(item.topps.length !== data.topps.length)
+                return isduplicate = false;
                 let tempitem = null;
                 item.topps.forEach(top => {
                     tempitem = data.topps.find(topp => topp._id === top._id)
-                    if (!tempitem) {
-                        return isduplicate = false;
-                        
-                    }
+                    if (!tempitem) return isduplicate = false;
                 });
                 if(isduplicate) {
                     const newitem = { ...item, sl: item.sl++ }
                     item = newitem;
-                    return this.props.incrCartItem(cart);
+                    this.props.incrCartItem(cart);
+                    return this.props.onClick();
                 }
                 // const newitem = { ...item, sl: item.sl++ }
                 // item = newitem;
                 // temp = true;
                 // return this.props.incrCartItem(cart);
 
-            } else {
-                return isduplicate = false;
             }
-            
         });
+        console.log('from asd' + isduplicate)
         if(isduplicate === false) {
             const newitem = { ...data };
             this.props.addCartItem(newitem, cart);

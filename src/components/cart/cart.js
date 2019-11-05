@@ -42,7 +42,7 @@ export class Cart extends Component {
                                                     <small>{item.sl}</small>
                                                     <DecrementBtn id={item.id} />
                                                 </div>
-                                                <div className="d-flex flex-column ">
+                                                <div className="d-flex flex-column">
                                                     <small><strong>
                                                         {item.product.prodName}
                                                     </strong></small>
@@ -52,14 +52,15 @@ export class Cart extends Component {
                                                         <DecrementBtn id={item.id}/>
                                                     </div> */}
                                                     {/* <Button variant="outline-danger">del</Button> */}
-                                                    <div className="d-flex flex-row justify-content-between">
-                                                        {item.topps.map(topp => (
-                                                            <small>{topp.toppName}</small>
-                                                        ))}
+                                                    {item.topps.map(topp => (
+                                                        <small>{topp.toppName}-</small>
+                                                    ))}
+                                                    {/* <div className="d-flex flex-row">
+                                                        
 
-                                                    </div>
+                                                    </div> */}
                                                 </div>
-                                                <small>{item.product.prodPrize}</small>
+                                                <small>${item.tongtien}</small>
                                                 <div className="align-self-center">
                                                     <DeleteCartButton id={item.id} />
                                                 </div>
