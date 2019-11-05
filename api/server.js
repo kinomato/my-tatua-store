@@ -13,6 +13,7 @@ const mongoose = require('mongoose');
 const auth = require('./modules/auth');
 const user = require('./modules/user-module');
 const product =require('./modules/product-module');
+const topp = require('./modules/topp-module');
 
 // const mongoClient = require('mongodb').MongoClient;
 const dbdat = config.get('mongoUrlDat');
@@ -41,6 +42,7 @@ app.use(bodyParser.json());
 app.use('/api/move/user', user);
 app.use('/api/move/auth', auth);
 app.use('/api/move/product',product);
+app.use('/api/move/topp',topp)
 // app.use('/api/move/driver', driver);
 // app.use('/api/move/paytype', paytype);
 

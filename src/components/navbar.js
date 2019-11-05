@@ -58,12 +58,12 @@ class NavigationBar extends Component {
         return (
             <div>
                 <Navbar bg="light" expand="lg">
-                    <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                    <Navbar.Brand href="#home">Umbreon</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                             <Nav.Link >
-                                <Link to="/content">Home</Link>
+                                <Link to="/home">Home</Link>
                             </Nav.Link>
                             {/* <Nav.Link href="">Manage</Nav.Link> */}
 

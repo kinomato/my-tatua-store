@@ -5,6 +5,7 @@ import toppingReducer from'./toppingReducer';
 import orderReducer from './orderReducer';
 import userReducer from './userReducer';
 import productReducer from './productReducer';
+import cartReducer from './cartReducer';
 
 export default combineReducers({
     error: errorReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     topping: toppingReducer,
     order: orderReducer,
     user: userReducer,
-    product: productReducer
+    product: productReducer,
+    cart: cartReducer
 })
