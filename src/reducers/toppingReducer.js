@@ -1,14 +1,23 @@
+
 import {
     TOPPINGS_LOADING,
     GET_TOPPING,
     GET_TOPPINGS,
-    GET_TOPPINGS_FAIL
+    GET_TOPPINGS_FAIL,
+    DELETE_TOPPING,
+    ADD_CART_TOPP,
+    REMOVE_CART_TOPP,
+    CLEAR_CART_TOPPS,
+    CALCULATE_TONGTIEN_TOPP,
+
 } from '../actions/types';
 
 const initialState = {
     topps: [],
     toppCT: null,
     loading: false,
+    carttopps: [],
+    tongtientopp: 0
 }
 
 export default function (state = initialState, action) {
@@ -26,7 +35,26 @@ export default function (state = initialState, action) {
                 toppCT: action.payload,
                 loading: false
             }
-
+        case CALCULATE_TONGTIEN_TOPP:
+            return {
+                ...state,
+                tongtientopp: action.payload
+            }
+        case ADD_CART_TOPP: 
+        return {
+            ...state,
+            carttopps: [...action.payload]
+        }
+        case REMOVE_CART_TOPP: 
+        return {
+            ...state,
+            carttopps: [...action.payload]
+        }
+        case CLEAR_CART_TOPPS: 
+        return {
+            ...state,
+            carttopps: []
+        }
         // case ADD_PRODUCT:
         //     return {
         //         ...state,

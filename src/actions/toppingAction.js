@@ -1,9 +1,13 @@
 import axios from 'axios';
 import { returnErrors } from './errorAction';
-
+import currency from 'currency.js';
 import {
     GET_TOPPINGS,
-    TOPPINGS_LOADING
+    TOPPINGS_LOADING,
+    ADD_CART_TOPP,
+    REMOVE_CART_TOPP,
+    CLEAR_CART_TOPPS,
+    CALCULATE_TONGTIEN_TOPP
 } from '../actions/types';
 
 export const getToppings = () => (dispatch) => {
@@ -19,6 +23,49 @@ export const getToppings = () => (dispatch) => {
             dispatch(returnErrors(err.response.data, err.response.status, 'GET_TOPPINGS_FAIL'));
 
         })
+}
+export const addCartTopp = (topp,carttopps) => dispatch => {
+    const newcarttopps = [ topp,...carttopps]
+    dispatch({
+        type: ADD_CART_TOPP,
+        payload: newcarttopps
+    })
+    dispatch(calculate(newcarttopps))
+}
+export const removeCartTopp = (id,carttopps) => dispatch => {
+    const newcarttopps = carttopps.filter(item => item._id !== id)
+    dispatch({
+        type: REMOVE_CART_TOPP,
+        payload: newcarttopps
+    })
+    dispatch(calculate(newcarttopps))
+}
+export const clearCartTopp = () => dispatch => {
+    dispatch({
+        type: CLEAR_CART_TOPPS
+    })
+    dispatch(calculate([]))
+}
+export const calculate = (carttopps) => dispatch => {
+    const newcarttopps = carttopps;
+    let tongtien = 0;
+    if (carttopps.length === 0) {
+        dispatch({
+            type: CALCULATE_TONGTIEN_TOPP,
+            payload: tongtien
+        })
+    } else {
+        newcarttopps.forEach(topp => {
+            const temp = currency(topp.toppPrize);
+            tongtien = currency(tongtien).add(temp);
+        });
+        console.log("from topping action" + tongtien)
+        dispatch({
+            type: CALCULATE_TONGTIEN_TOPP,
+            payload: tongtien
+        })
+    }
+
 }
 // export const getProduct = (id) => (dispatch) => {
 //     dispatch(setOrderLoading());

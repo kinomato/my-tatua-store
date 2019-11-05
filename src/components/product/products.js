@@ -48,7 +48,7 @@ class Products extends Component {
                                             {prodPrize}
                                         </Card.Text>
                                         {/* <Button variant="primary" onClick={(product)=> this.handleOnclick(product)} block>Chọn</Button> */}
-                                        {/* <AddCartButton product={product} /> */}
+                                        {/* <AddCartButton kiboi={'kydan'} product={product} /> */}
                                         <ProtopModal product = {product}/>
                                     </Card.Body>
                                 </Card>

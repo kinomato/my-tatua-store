@@ -1,8 +1,8 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button} from 'react-bootstrap'
-import {connect} from 'react-redux';
-import {addCartItem, incrCartItem, calculate} from '../../actions/cartAction';
+import { Button } from 'react-bootstrap'
+import { connect } from 'react-redux';
+import { addCartItem, incrCartItem, calculate } from '../../actions/cartAction';
 import uuid from 'uuid';
 
 class AddCartButton extends Component {
@@ -13,74 +13,63 @@ class AddCartButton extends Component {
         }
         // this.CheckDuplicate = this.CheckDuplicate.bind(this);
     }
-    
-    CheckDuplicate=(product) =>{
-        let temp = false;
-        const {cart} = this.props;
-        const {localcart} = this.state;
+
+    CheckDuplicate = (data) => {
+        let isduplicate = true;
+        const { cart } = this.props;
+        const { localcart } = this.state;
         this.setState({
             localcart: cart
         })
-         console.log(localcart);
+        //  console.log(this.props.kiboi);
         cart.forEach(item => {
-            if(item.product._id===product._id)
-            {
-                const newitem = {...item, sl: item.sl++}
-                item = newitem;
-                // console.log(localcart);
-                temp = true;
-                return this.props.incrCartItem(cart);
-                
+            if (item.product._id === data.product._id) {
+                let tempitem = null;
+                item.topps.forEach(top => {
+                    tempitem = data.topps.find(topp => topp._id === top._id)
+                    if (!tempitem) {
+                        return isduplicate = false;
+                        
+                    }
+                });
+                if(isduplicate) {
+                    const newitem = { ...item, sl: item.sl++ }
+                    item = newitem;
+                    return this.props.incrCartItem(cart);
+                }
+                // const newitem = { ...item, sl: item.sl++ }
+                // item = newitem;
+                // temp = true;
+                // return this.props.incrCartItem(cart);
+
+            } else {
+                return isduplicate = false;
             }
+            
         });
-        if(!temp) {
-            const newitem = {id:uuid(),product,sl:1};
-            this.props.addCartItem(newitem,cart);
-            
+        if(isduplicate === false) {
+            const newitem = { ...data };
+            this.props.addCartItem(newitem, cart);
+            return this.props.onClick();
         }
-        
-        
+
     }
-    
-    // componentDidUpdate(Prevprops) {
-    //     const {cart} = this.props;
-    //     if(Prevprops.cart !== this.props.cart)
-    //     this.setState({
-    //         localcart: cart
-    //     })
-    //     this.props.calculate(this.state.localcart)
-    // }
-    // componentDidUpdate(prevProps) {
-    //     const {cart} = this.props;
-    //     if( cart.length !== prevProps.cart.length) {
-    //         // kiem tra registor error
-    //         this.setState({
-    //             localcart: cart
-    //         })
-            
-    //     }
-    // }
-    // componentWillReceiveProps(nextProps) {
-    //     this.setState({
-    //         localcart: nextProps.cart
-    //     })
-    // }
     render() {
-        const { product } = this.props;
+        const { item } = this.props;
         return (
-            <Button block variant="outline-primary" onClick={() =>this.CheckDuplicate(product)}>Đặt</Button>
+            <Button block variant="outline-primary" onClick={() => this.CheckDuplicate(item)}>Đặt</Button>
         )
     }
-    
-   
+
+
 }
 
 AddCartButton.propTypes = {
-    addCartItem:PropTypes.func.isRequired,
-    incrCartItem:PropTypes.func.isRequired
+    addCartItem: PropTypes.func.isRequired,
+    incrCartItem: PropTypes.func.isRequired
 }
 const mapStateToProps = state => ({
     cart: state.cart.cart
 })
-export default connect(mapStateToProps,{addCartItem,incrCartItem,calculate})(AddCartButton)
+export default connect(mapStateToProps, { addCartItem, incrCartItem, calculate })(AddCartButton)
 

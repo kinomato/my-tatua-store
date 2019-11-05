@@ -26,7 +26,7 @@ export class Cart extends Component {
                     <Card.Header>Giỏ hàng</Card.Header>
                     <div >
                         <ListGroup>
-                            <ListGroup.Item style={{backgroundColor:"rgba(136,255,99,0.2)"}}>
+                            <ListGroup.Item style={{ backgroundColor: "rgba(136,255,99,0.2)" }}>
                                 <div className="d-flex flex-row justify-content-between" >
                                     <small>Tổng tiền: $ {this.props.tongtien}</small>
                                 </div>
@@ -43,13 +43,21 @@ export class Cart extends Component {
                                                     <DecrementBtn id={item.id} />
                                                 </div>
                                                 <div className="d-flex flex-column ">
-                                                    <small>{item.product.prodName}</small>
+                                                    <small><strong>
+                                                        {item.product.prodName}
+                                                    </strong></small>
                                                     {/* <div className="d-flex flex-row justify-content-start">
                                                         <IncrementBtn id={item.id} />
                                                         <small>{item.sl}</small>
                                                         <DecrementBtn id={item.id}/>
                                                     </div> */}
                                                     {/* <Button variant="outline-danger">del</Button> */}
+                                                    <div className="d-flex flex-row justify-content-between">
+                                                        {item.topps.map(topp => (
+                                                            <small>{topp.toppName}</small>
+                                                        ))}
+
+                                                    </div>
                                                 </div>
                                                 <small>{item.product.prodPrize}</small>
                                                 <div className="align-self-center">

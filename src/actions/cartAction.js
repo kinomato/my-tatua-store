@@ -82,12 +82,12 @@ export const decrement = (id,cart) => dispatch => {
 }
 export const calculate = (cart) => dispatch => {
     let money = 0;
-    if(cart.length === 0) 
-    console.log('shjt');
-    console.log(cart)
+    // if(cart.length === 0) 
+    // console.log('shjt');
+    // console.log(cart)
     cart.forEach(item => {
-        const tempProdPrize = currency(item.product.prodPrize)
-        const temp = tempProdPrize.multiply(item.sl);
+        const temptongtien = currency(item.tongtien)
+        const temp = temptongtien.multiply(item.sl);
         money = currency(money).add(temp);
     });
     console.log(money);
