@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import PaypalExpressBtn from 'react-paypal-express-checkout';
-import { Button } from 'react-bootstrap'
+// import { Button } from 'react-bootstrap'
 
 export class Checkout extends Component {
     constructor(props) {
@@ -47,7 +47,7 @@ export class Checkout extends Component {
 
         let env = 'sandbox'; // you can set this string to 'production'
         let currency = 'USD'; // you can set this string from your props or state  
-        let total = 1;  // this is the total amount (based on currency) to charge
+        // let total = 1;   this is the total amount (based on currency) to charge
         // Document on Paypal's currency code: https://developer.paypal.com/docs/classic/api/currency_codes/
         const client = {
             sandbox: 'AVV055FllZSqjk4tm-QBwxlUF0ltBAlUHUti_DWDpKzVomSX4ItUK8OdjKqTChqWeTuL1kMTzwBayD2z',

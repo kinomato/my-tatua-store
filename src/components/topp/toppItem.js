@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Button, Form } from 'react-bootstrap'
+import {  Form } from 'react-bootstrap'
 import {addCartTopp, removeCartTopp} from '../../actions/toppingAction'
 
 export class ToppItem extends Component {
@@ -60,7 +60,7 @@ export class ToppItem extends Component {
         this.checkToDisable();
     }
     render() {
-        const { topp, isdisabled } = this.props;
+        const { topp } = this.props;
         return (
             <>
              <Form.Check

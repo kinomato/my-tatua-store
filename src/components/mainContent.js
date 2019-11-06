@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Card } from 'react-bootstrap';
+import { Row, Col,  Card } from 'react-bootstrap';
 import ControlledCarousel from './carousel';
 import Products from './product/products';
 import InfoUmbreon from './info/infoUmbreon';
 import Cart from './cart/cart';
-import Tst from './tst';
 class MainContent extends Component {
     render() {
         return (

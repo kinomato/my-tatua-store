@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Button, ListGroup, Form, Image, Container, Row, Col } from 'react-bootstrap'
+import { Button,  Form, Image, Container, Row, Col } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal'
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../../css/modal.css';
 import ToppItem from '../topp/toppItem'
@@ -33,11 +33,6 @@ class ProTopModal extends Component {
             show: false
         })
 
-    }
-    handleConfirmed() {
-        const newItem = {
-
-        }
     }
     componentWillReceiveProps(nextprops) {
         const prodprize = currency(nextprops.product.prodPrize);

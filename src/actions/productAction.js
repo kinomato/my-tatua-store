@@ -3,16 +3,16 @@ import { returnErrors } from './errorAction';
 
 import {
     GET_PRODUCTS,
-    ADD_PRODUCT,
-    DELETE_PRODUCT,
+    // ADD_PRODUCT,
+    // DELETE_PRODUCT,
     // GET_ERRORS,
-    GET_PRODUCTS_FAIL,
+    // GET_PRODUCTS_FAIL,
     GET_PRODUCT_FAIL,
     PRODUCTS_LOADING,
     GET_PRODUCT,
-    GET_PRODUCTS_COUNT,
-    GET_PRODUCTS_COUNTC,
-    GET_PRODUCT_CHART_DATA
+    // GET_PRODUCTS_COUNT,
+    // GET_PRODUCTS_COUNTC,
+    // GET_PRODUCT_CHART_DATA
 } from '../actions/types';
 
 export const getProducts = () => (dispatch) => {

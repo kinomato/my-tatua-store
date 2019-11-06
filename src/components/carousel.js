@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Carousel, Container } from 'react-bootstrap'
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import { Carousel } from 'react-bootstrap'
 import '../css/carouselStyle.css'
 
 export default function ControlledCarousel() {

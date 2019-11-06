@@ -3,7 +3,7 @@ import {
     ADD_ITEM_CART,
     DELETE_ITEM_CART,
     GET_ITEM_CART,
-    GET_ITEM_CART_ERROR,
+    // GET_ITEM_CART_ERROR,
     INCR_ITEM_CART,
     CALCULATE_TONGTIEN,
     INCREMENT,
@@ -11,10 +11,15 @@ import {
 } from '../actions/types';
 
 // return errors
-export const getCartItems = () => {
-    return {
+export const getCartItems = () => dispatch => {
+    const temp = localStorage.getItem("cart")
+    const localcart = temp === '' ?  []:JSON.parse(temp);
+    
+    dispatch({
         type: GET_ITEM_CART,
-    }
+        payload: localcart
+    })
+    dispatch(calculate(localcart))
 }
 
 export const incrCartItem = (cart) => dispatch=> {

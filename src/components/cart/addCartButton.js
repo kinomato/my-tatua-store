@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
 import { connect } from 'react-redux';
 import { addCartItem, incrCartItem, calculate } from '../../actions/cartAction';
-import uuid from 'uuid';
 
 class AddCartButton extends Component {
     constructor(props) {
@@ -17,7 +16,6 @@ class AddCartButton extends Component {
     CheckDuplicate = (data) => {
         let isduplicate = false;
         const { cart } = this.props;
-        const { localcart } = this.state;
         this.setState({
             localcart: cart
         })
@@ -45,7 +43,7 @@ class AddCartButton extends Component {
 
             }
         });
-        console.log('from asd' + isduplicate)
+        // console.log('from asd' + isduplicate)
         if(isduplicate === false) {
             const newitem = { ...data };
             this.props.addCartItem(newitem, cart);

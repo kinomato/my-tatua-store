@@ -1,5 +1,5 @@
-import React, { Component, useState } from 'react';
-import uuid from 'uuid';
+import React, { Component } from 'react';
+// import uuid from 'uuid';
 import { connect } from 'react-redux';
 
 import { Modal, Button, Form, Nav, Alert } from 'react-bootstrap';
