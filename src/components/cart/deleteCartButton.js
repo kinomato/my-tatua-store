@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { deleteCartItem, calculate } from '../../actions/cartAction';
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 import { IconContext } from 'react-icons'
 

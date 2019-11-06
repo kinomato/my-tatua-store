@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, Button } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getProducts } from '../../actions/productAction';
 import { getToppings } from '../../actions/toppingAction';
-import AddCartButton from '../cart/addCartButton';
 
 import PropTypes from 'prop-types';
 import '../../css/textslide.css';
@@ -26,13 +25,13 @@ class Products extends Component {
         console.log(item);
     }
     render() {
-        const slidestyle = {}
+        
         const { products } = this.props;
         return (
             <div>
                 <Row>
                     {products.map(product => {
-                        const { _id, prodName, prodURL, prodPrize, isDeleted } = product;
+                        const { _id, prodName, prodURL, prodPrize} = product;
                         return (
                             <Col style={{ marginBottom: "2rem" }}>
                                 <Card key={_id} style={{ height: "100%", width: '15rem' }}>

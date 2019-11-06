@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
-import { Container, Card, Button, Table, ButtonGroup } from 'react-bootstrap'
-import { HashLoader, BarLoader, BeatLoader } from 'react-spinners';
+// import { Link } from 'react-router-dom'
+import { Container, Button, Table, ButtonGroup } from 'react-bootstrap'
+import {  BeatLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -33,10 +33,10 @@ class ProductList extends Component {
         const loaded = (
             <Fragment>
                 {products !== null ? products.map(product => {
-                    const { _id, prodName, prodPrize, toppName, toppPrize, isDeleted } = product;
+                    const { _id, prodName, prodPrize, isDeleted } = product;
 
                     return (
-                        <tr>
+                        <tr key = {_id}>
                             {/* <td>{1}</td>
                             <td>{_id}</td> */}
                             <td>{prodName}</td>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getCartItems, deleteCartItem } from '../../actions/cartAction';
 import DeleteCartButton from './deleteCartButton';
-import { ListGroup, Button, Card } from 'react-bootstrap'
+import { ListGroup, Card } from 'react-bootstrap'
 import IncrementBtn from './incrementBtn';
 import DecrementBtn from './decrementBtn';
 import Checkout from '../paypal/checkout';
