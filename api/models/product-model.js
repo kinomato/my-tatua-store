@@ -15,16 +15,6 @@ const ProductSchema = schema({
         type: String,
         require: true
     },
-    topp: [{
-        toppName: {
-            type: String,
-            require: true
-        },
-        toppPrize: {
-            type: String,
-            require: true
-        }
-    }],
     isDeleted: {
         type: Boolean,
         default: false
