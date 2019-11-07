@@ -28,11 +28,12 @@ class Login extends Component {
     handleClose = () => {
         //clear errors
         this.props.clearErrors();
+        this.props.onClick();
         this.setState({ show: false });
-        // console.log(this.state.show)
+        console.log(this.state.show);
     }
-    handleShow = () => {
-        this.setState({ show: true });
+    handleShow = (temp) => {
+        this.setState({ show: temp });
         // console.log(this.state.show)
     }
     handleSubmit = (e) => {
@@ -76,12 +77,18 @@ class Login extends Component {
             }
         }
     }
+    componentWillReceiveProps(nextProps) {
+        const {temp} = nextProps;
+        if(temp) 
+        this.handleShow(temp);
+    }
+    
     render() {
         return (
             <div>
-                <Nav.Link onClick={() => this.handleShow()} href="#">
+                {/* <Nav.Link onClick={() => this.handleShow()} href="#">
                     Login
-                </Nav.Link>
+                </Nav.Link> */}
                 <Modal show={this.state.show} onHide={() => this.handleClose()} >
                     <Modal.Header closeButton>
                         <Modal.Title>Login</Modal.Title>

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Navbar, Nav, Dropdown, NavDropdown } from 'react-bootstrap';
 import RegisterModal from './auth/register';
 import Logout from './auth/logout';
-import Login from './auth/login';
+import LoginBtn from './auth/loginBtn';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
@@ -25,7 +25,7 @@ class NavigationBar extends Component {
                     <RegisterModal />
                 </Nav.Item>
                 <Nav.Item>
-                    <Login />
+                    <LoginBtn />
                 </Nav.Item>
             </Fragment>
         )
