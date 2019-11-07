@@ -14,16 +14,16 @@ const User = require('../models/user-model');
 router.post('/login', (req, res) => {
     // Kỹ thuật Destructuring object jvscript
     // lấy email và mật khẩu thay vì sau này phải ghi req.body.email, req.body.matkhau
-    const { email, matKhauDangNhap } = req.body;
-    if (!email || !matKhauDangNhap) {
+    const { userEmail, userPassword } = req.body;
+    if (!userEmail || !userPassword) {
         return res.status(400).json({ msg: 'Vui lòng nhập đầy đủ các field' })
     }
-    const userEmail = email;
+    // const userEmail = userEmail;
     // tìm tài khoản bằng email
     User.findOne({ userEmail }).then(user => {
         // không thấy đồng nghĩa với trả về user undefined => gửi status 400 
         if (!user) return res.status(400).json({ msg: 'User không tồn tại' })
-        if(matKhauDangNhap.localeCompare(user.userPassword) !== 0)
+        if(userPassword.localeCompare(user.userPassword) !== 0)
         return res.status(400).json({ msg: "invalid" });
         jwt.sign(
             { id: user.id },
@@ -35,9 +35,11 @@ router.post('/login', (req, res) => {
                     token,
                     user: {
                         id: user.id,
-                        tenNguoiDung: user.userName,
-                        sdt: user.userPhone,
-                        email: user.userEmail,
+                        userName: user.userName,
+                        userPhone: user.userPhone,
+                        userEmail: user.userEmail,
+                        userGender: user.userGender,
+                        userAddress: user.userAddress,
                         priority: user.priority
                     }
                 })
@@ -75,11 +77,11 @@ router.post('/login', (req, res) => {
 // @descr lấy data user thông qua token
 // @access private
 router.get('/user', auth, (req, res) => {
-    console.log(req.user);
+    // console.log(req.user);
     User.findById(req.user.id)
-        .select('-matKhauDangNhap')
+        .select('-userPassword')
         .then(user =>{
-            console.log(user);
+            // console.log(user);
             res.json(user)
         })
 });

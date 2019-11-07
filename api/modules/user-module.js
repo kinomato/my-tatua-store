@@ -84,6 +84,8 @@ router.post('/register', (req, res) => {
                             userName: user.userName,
                             userPhone: user.userPhone,
                             userEmail: user.userEmail,
+                            userGender: user.userGender,
+                            userAddress: user.userAddress,
                             priority: user.priority
                         }
                     })

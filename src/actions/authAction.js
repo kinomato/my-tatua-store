@@ -74,14 +74,14 @@ export const logout = ()  => {
     }
 }
 
-export const login = ({email, matKhauDangNhap}) => dispatch => {
+export const login = ({userEmail, userPassword}) => dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     }
 
-    const body = JSON.stringify({ email,matKhauDangNhap });
+    const body = JSON.stringify({ userEmail, userPassword });
 
     axios.post('/api/move/auth/login', body, config)
     .then(res => dispatch({
