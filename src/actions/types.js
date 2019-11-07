@@ -1,3 +1,7 @@
+// NGUOINHAN
+export const SET_INFO_NHAN = "GET_INFO_NHAN";
+export const CLEAR_INFO_NHAN = "CLEAR_INFO_NHAN";
+export const SET_XY_NHAN = "GET_XY_NHAN";
 // CART 
 export const ADD_ITEM_CART = "ADD_ITEM_CART";
 export const DELETE_ITEM_CART = "DELETE_ITEM_CART";

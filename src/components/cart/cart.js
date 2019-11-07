@@ -6,7 +6,8 @@ import DeleteCartButton from './deleteCartButton';
 import { ListGroup, Card } from 'react-bootstrap'
 import IncrementBtn from './incrementBtn';
 import DecrementBtn from './decrementBtn';
-import Checkout from '../paypal/checkout';
+// import Checkout from '../paypal/checkout';
+import CheckoutButton from './checkoutButton';
 
 export class Cart extends Component {
     static propTypes = {
@@ -81,7 +82,11 @@ export class Cart extends Component {
 
                         </ListGroup>
                     </div>
-                    <Checkout />
+                    {/* <Checkout /> */}
+                    <div style={{ margin: '1rem' }}>
+                        <CheckoutButton />
+                    </div>
+
                     {/* <Button variant="outline-success">Thanh toán</Button> */}
                 </Card>
             )
@@ -89,12 +94,7 @@ export class Cart extends Component {
             return (
                 <Card className="sticky-top">
                     <Card.Header>Giỏ hàng</Card.Header>
-                    <div style={{ maxHeight: '70vh', overflowY: "scroll" }}>
-
-                        Đặt hàng đi bạn
-                            </div>
-
-
+                    <div style={{ maxHeight: '70vh', overflowY: "scroll" }}>Đặt hàng đi bạn</div>
                 </Card>
 
             )
