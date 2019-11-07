@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PromoSchema= new Schema({
-    
+    _id:{type:String},
     promo:  {
         type: String,
         require: true
@@ -11,15 +11,8 @@ const PromoSchema= new Schema({
         type: String,
         require: true
     },
-    // donHangs: [
-    //     {
-    //         type: Schema.Types.ObjectId,
-    //         ref: 'order'
-    //     }
-    // ],
     isDeleted:  {
         type: String,
-        require: true,
         default: false
     },
 })
