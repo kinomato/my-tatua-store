@@ -79,9 +79,6 @@ class Login extends Component {
     render() {
         return (
             <div>
-                {/* <Button variant="primary" onClick={() => this.handleShow} style={{ marginTop: '2rem', marginBottom: '2rem' }}>
-                    Add item
-            </Button> */}
                 <Nav.Link onClick={() => this.handleShow()} href="#">
                     Login
                 </Nav.Link>
