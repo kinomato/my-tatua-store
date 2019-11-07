@@ -51,24 +51,23 @@ router.get("/:id", (req, res) => {
 
 router.post('/register', (req, res) => {
     const _id = mongoose.Types.ObjectId();
-    const { tenNguoiDung, email, matKhauDangNhap, sdt } = req.body;
-    if (!tenNguoiDung || !email || !matKhauDangNhap || !sdt) {
+    const { userName,userEmail,userPassword,userPhone } = req.body;
+    if (!userName || !userEmail || !userPassword || !userPhone) {
         return res.status(400).json({ msg: 'Vui lòng nhập đầy đủ field' })
     }
 
-    User.findOne({ email }).then(user => {
+    User.findOne({ userEmail }).then(user => {
         if (user) return res.status(400).json({ msg: 'Người dùng đã tồn tại' })
-        const date = Date().now;
-        console.log(date);
+        // const date = Date().now;
+        // console.log(date);
         const newUser = new User({
             _id,
-            userName:tenNguoiDung,
-            userEmail:email,
-            userPhone:sdt,
+            userName:userName,
+            userEmail:userEmail,
+            userPhone:userPhone,
             userGender:'',
             userAddress:'',
-            userBirthDay:date,
-            userPassword:matKhauDangNhap,
+            userPassword:userPassword,
             priority: 0
         });
         newUser.save().then(user => {
@@ -82,9 +81,11 @@ router.post('/register', (req, res) => {
                         token,
                         user: {
                             id: user.id,
-                            tenNguoiDung: user.userName,
-                            sdt: user.userPhone,
-                            email: user.userEmail,
+                            userName: user.userName,
+                            userPhone: user.userPhone,
+                            userEmail: user.userEmail,
+                            userGender: user.userGender,
+                            userAddress: user.userAddress,
                             priority: user.priority
                         }
                     })
@@ -108,7 +109,7 @@ router.post('/register', (req, res) => {
         //                         token,
         //                         user: {
         //                             id: user.id,
-        //                             tenNguoiDung: user.tenNguoiDung,
+        //                             userName: user.userName,
         //                             sdt: user.sdt,
         //                             email: user.email
         //                         }

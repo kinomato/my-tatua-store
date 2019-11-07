@@ -39,10 +39,10 @@ class Register extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const newUser = {
-            tenNguoiDung: this.state.name,
-            email: this.state.email,
-            matKhauDangNhap: this.state.password,
-            sdt: this.state.sdt
+            userName: this.state.name,
+            userEmail: this.state.email,
+            userPassword: this.state.password,
+            userPhone: this.state.sdt
         }
         // console.log('hello')
         // console.log(newUser);

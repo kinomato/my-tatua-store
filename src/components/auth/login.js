@@ -38,11 +38,11 @@ class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const User = {
-            email: this.state.email,
-            matKhauDangNhap: this.state.password
+            userEmail: this.state.email,
+            userPassword: this.state.password
         }
-        console.log('hello')
-        console.log(User);
+        // console.log('hello')
+        // console.log(User);
         this.props.login(User);
         // this.props.addItem(newItem);
 

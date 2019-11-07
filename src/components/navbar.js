@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Navbar, Nav, Dropdown } from 'react-bootstrap';
+import { Navbar, Nav, Dropdown, NavDropdown } from 'react-bootstrap';
 import RegisterModal from './auth/register';
 import Logout from './auth/logout';
 import Login from './auth/login';
@@ -18,6 +18,7 @@ class NavigationBar extends Component {
     //     }
     // }
     render() {
+        const { user, isAuthenticated } = this.props;
         const guestLinks = (
             <Fragment>
                 <Nav.Item>
@@ -28,60 +29,65 @@ class NavigationBar extends Component {
                 </Nav.Item>
             </Fragment>
         )
+        const adminLink = (
+            <>
+                <NavDropdown title='Manage' id="basic-nav-dropdown">
+                    <NavDropdown.Item>
+                        asd
+                            </NavDropdown.Item>
+                    <NavDropdown.Item>
+                        asd
+                            </NavDropdown.Item>
+                    <NavDropdown.Item>Something</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item >asd</NavDropdown.Item>
+                </NavDropdown>
+
+            </>
+        )
         const authLinks = (
             <Fragment>
-                <Dropdown>
-                    <Dropdown.Toggle id="dropdown-basic">
-                        Manage
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">Manage User</Dropdown.Item>
-                        <Dropdown.Item href="/productList">Manage Product</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Manage Topping</Dropdown.Item>
-                        <Dropdown.Divider />
-                        <Dropdown.Item href="#/action-3">About</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Help</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-                <Nav.Link>
-                    <span className="mr-3">
-                        <strong>{this.props.user ? `Welcome ${this.props.user.userName}` : ''}</strong>
-                    </span>
-                </Nav.Link>
-                <Nav.Item>
-                    <Logout />
-                </Nav.Item>
+                <span className="mr-3">
+                    {/* <strong>{this.props.user ? `Welcome ${this.props.user.userName}` : ''}</strong> */}
+                    <NavDropdown
+                        title={user ? `Welcome ${user.userName}` : ''}
+                        id="basic-nav-dropdown">
+                        <NavDropdown.Item>
+                            <Link to='/account'>Thông tin cá nhân</Link>
+                        </NavDropdown.Item>
+                        <NavDropdown.Item>
+                            <Link to='/'>Lịch sử giao dịch</Link>
+                        </NavDropdown.Item>
+                        {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item ><Logout /></NavDropdown.Item>
+                    </NavDropdown>
+                </span>
 
             </Fragment>
         )
         return (
             <div>
                 <Navbar bg="light" expand="lg">
-                    <Navbar.Brand href="#home">Umbreon</Navbar.Brand>
+                    <Navbar.Brand>
+                        <strong>
+                            <Link to='/home'>
+                                Umbreon
+                        </Link>
+                        </strong>
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                             <Nav.Link >
                                 <Link to="/home">Home</Link>
                             </Nav.Link>
-                            {/* <Nav.Link href="">Manage</Nav.Link> */}
-
                         </Nav>
 
                         <Nav className="ml-auto">
-                            {/* {!this.props.isAuthenticated ? <RegisterModal />:null}
-                            {!this.props.isAuthenticated ? <Login/>:null}
-                            {this.props.user ? <div>{this.props.user.tenNguoiDung}</div>:null}
-                            {this.props.isAuthenticated ? <Logout/>:null} */}
-                            {this.props.isAuthenticated ? authLinks : guestLinks}
-
-
+                            {isAuthenticated && user.priority >=1 ? adminLink:null}
+                            {isAuthenticated ? authLinks : guestLinks}
                         </Nav>
-                        {/* <Form inline>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Button variant="outline-success">Search</Button>
-                        </Form> */}
                     </Navbar.Collapse>
                 </Navbar>
             </div>
