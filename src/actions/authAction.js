@@ -46,14 +46,14 @@ export const loadUser = () => (dispatch, getState) => {
 }
 
 // register user
-export const register = ({ tenNguoiDung,email,matKhauDangNhap,sdt }) => dispatch => {
+export const register = ({ userName,userEmail,userPassword,userPhone }) => dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     }
 
-    const body = JSON.stringify({ tenNguoiDung,email,matKhauDangNhap,sdt });
+    const body = JSON.stringify({ userName,userEmail,userPassword,userPhone });
 
     axios.post('/api/move/user/register', body, config)
     .then(res => dispatch({

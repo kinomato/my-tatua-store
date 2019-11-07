@@ -31,7 +31,7 @@ router.post('/login', (req, res) => {
              { expiresIn: 3600},
             (err, token) => {
                 if (err) throw err;
-                res.status(200).json({
+                return res.status(200).json({
                     token,
                     user: {
                         id: user.id,
@@ -44,31 +44,31 @@ router.post('/login', (req, res) => {
             }
         )
         // Dùng hàm đặc biệt của bcrypt để so sánh mật khẩu đã nhập với mật khẩu đã được mã hóa
-        bcrypt.compare(matKhauDangNhap, user.matKhauDangNhap)
-            .then(isMatch => {
-                // không trùng đồng nghĩa không đúng mật khẩu => gửi status 400 cùng error invalid
-                // đồng thời ngừng luôn hoạt động
-                if (!isMatch) return res.status(400).json({ msg: "invalid" });
+        // bcrypt.compare(matKhauDangNhap, user.userPassword)
+        //     .then(isMatch => {
+        //         // không trùng đồng nghĩa không đúng mật khẩu => gửi status 400 cùng error invalid
+        //         // đồng thời ngừng luôn hoạt động
+        //         if (!isMatch) return res.status(400).json({ msg: "invalid" });
 
-                //
-                jwt.sign(
-                    { id: user.id },
-                    config.get('jwtSecret'),
-                    // { expireqIn: 3600},
-                    (err, token) => {
-                        if (err) throw err;
-                        res.status(200).json({
-                            token,
-                            user: {
-                                id: user.id,
-                                tenNguoiDung: user.userName,
-                                email: user.userEmail,
-                                priority: user.priority
-                            }
-                        })
-                    }
-                )
-            })
+        //         //
+        //         jwt.sign(
+        //             { id: user.id },
+        //             config.get('jwtSecret'),
+        //             // { expireqIn: 3600},
+        //             (err, token) => {
+        //                 if (err) throw err;
+        //                 res.status(200).json({
+        //                     token,
+        //                     user: {
+        //                         id: user.id,
+        //                         tenNguoiDung: user.userName,
+        //                         email: user.userEmail,
+        //                         priority: user.priority
+        //                     }
+        //                 })
+        //             }
+        //         )
+        //     })
     }) 
 })
 // @route GET api/auth/user
