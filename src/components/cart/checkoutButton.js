@@ -2,25 +2,36 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import Login from '../auth/login'
+import Checkout from '../paypal/checkout';
+import CheckoutScreen from '../order/checkoutScreen';
 export class checkoutButton extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            temp: false
+            showlogin: false,
+            showcheckout: false,
         }
     }
-    handleKickBack = () => {
+    handleLoginKick = () => {
         this.setState({
-            temp: false
+            showlogin: false
+        })
+    }
+    handleCheckoutKick = () => {
+        this.setState({
+            showcheckout: false
         })
     }
     render() {
+        const {showlogin,showcheckout} = this.state;
         const {isAuthenticated} = this.props;
         if(isAuthenticated) {
             return (
                 <div>
-                    <Button variant="outline-primary" >yolo</Button>
-                    
+                    <Button block variant="outline-success" 
+                    onClick={() => this.setState({showcheckout: true})}>Thanh toán</Button>
+                    <CheckoutScreen onClick={this.handleCheckoutKick} temp = {showcheckout} />
+                    {/* <Checkout /> */}
                 </div>
             )
         } else {
@@ -28,8 +39,8 @@ export class checkoutButton extends Component {
                 <div>
                     <Button block
                      variant="outline-success"
-                    onClick={() => this.setState({temp:true})}>Thanh toán</Button>
-                    <Login onClick={this.handleKickBack} temp = {this.state.temp} />
+                    onClick={() => this.setState({showlogin: true})}>Thanh toán</Button>
+                    <Login onClick={this.handleLoginKick} temp = {showlogin} />
                 </div>
             )
         }

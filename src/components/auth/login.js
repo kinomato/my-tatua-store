@@ -30,7 +30,7 @@ class Login extends Component {
         this.props.clearErrors();
         this.props.onClick();
         this.setState({ show: false });
-        console.log(this.state.show);
+        // console.log(this.state.show);
     }
     handleShow = (temp) => {
         this.setState({ show: temp });
@@ -45,6 +45,7 @@ class Login extends Component {
         // console.log('hello')
         // console.log(User);
         this.props.login(User);
+        this.props.onClick();
         // this.props.addItem(newItem);
 
     }
