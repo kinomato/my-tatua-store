@@ -18,6 +18,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import ProductList from './components/product/productList';
+import userList from './components/admin/user/userList';
 
 class App extends Component {
   componentDidMount() {

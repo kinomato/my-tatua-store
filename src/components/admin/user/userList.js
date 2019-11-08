@@ -1,26 +1,25 @@
 import React, { Component, Fragment } from 'react'
-// import { Link } from 'react-router-dom'
 import { Container, Button, Table, ButtonGroup } from 'react-bootstrap'
 import {  BeatLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getProducts } from '../../actions/productAction';
+import { getUsers } from '../../../actions/userAction';
 
-class ProductList extends Component {
+class UserList extends Component {
 
     static propTypes = {
-        products: PropTypes.array.isRequired,
-        getProducts: PropTypes.func.isRequired,
+        users: PropTypes.array.isRequired,
+        getUser: PropTypes.func.isRequired,
         loading: PropTypes.bool.isRequired,
         error: PropTypes.object.isRequired
     }
     componentDidMount() {
-        this.props.getProducts();
+        this.props.getUsers();
     }
 
     render() {
-        const { products } = this.props;
+        const { users } = this.props;
         const loading = (
             <Fragment>
                 <td colSpan='5' align='center'>
@@ -32,16 +31,20 @@ class ProductList extends Component {
         )
         const loaded = (
             <Fragment>
-                {products !== null ? products.map(product => {
-                    const { _id, prodName, prodPrize, isDeleted } = product;
+                {users !== null ? users.map(user => {
+                    const { _id, userName, userEmail, userAddress,userPhone,userGenre,userPassword } = user;
 
                     return (
                         <tr key = {_id}>
                             {/* <td>{1}</td>
                             <td>{_id}</td> */}
-                            <td>{prodName}</td>
-                            <td>{prodPrize}</td>
-                            <td>{isDeleted ? 'Unvailable' : 'Available'}</td>
+                            <td>{userName}</td>
+                            <td>{userEmail}</td>
+                            <td>{userAddress}</td>
+                            <td>{userPhone}</td>
+                            <td>{userGenre}</td>
+                            <td>{userPassword}</td>
+                            {/* <td>{isDeleted ? 'Unvailable' : 'Available'}</td> */}
 
                             <td>
                                 <ButtonGroup aria-label="Basic example">
@@ -63,9 +66,12 @@ class ProductList extends Component {
                     <Table striped bordered hover variant="dark">
                         <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>Product prize (VND)</th>
-                                <th>Status</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Genre</th>
+                                <th>Password</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,8 +89,8 @@ class ProductList extends Component {
     }
 }
 const mapStateToProps = state => ({
-    products: state.product.products,
-    loading: state.product.loading,
+    users: state.user.users,
+    loading: state.user.loading,
     error: state.error
 })
-export default connect(mapStateToProps, { getProducts })(ProductList)
+export default connect(mapStateToProps, { getUsers })(UserList)

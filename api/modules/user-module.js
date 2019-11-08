@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
@@ -15,9 +14,9 @@ const Order = require('../models/order-model');
 // @access public
 // lấy tổng số document user
 router.get("/get/count", (req, res) => {
-    User.estimatedDocumentCount((err,count) => {
+    User.estimatedDocumentCount((err, count) => {
         if (err)
-        return res.status(400).json({msg: `something gone wrong: ${err}`});
+            return res.status(400).json({ msg: `something gone wrong: ${err}` });
         res.status(200).json(count);
     }).catch(err => console.log('yolo' + err));
 })
@@ -25,6 +24,15 @@ router.get("/get/count", (req, res) => {
 // const a= [1,2,3];
 // const b= [...a,4];
 // b = [...b,5];
+router.get('/', (req, res) => {
+    User.find({}, (err, data) => {
+        if (err || data.isDeleted) {
+            res.status(400).json({ msg: `something gone wrong: ${err}` })
+        }
+        res.json(data);
+    })
+        .catch(err => res.status(400).json({ msg: `something gone wrong: ${err}` }))
+})
 router.get("/:id", (req, res) => {
 
     let arrOrder = [];
@@ -40,9 +48,9 @@ router.get("/:id", (req, res) => {
                 // gán mảng được tạo ở trên
                 arrOrder = [...arrOrder, donHang];
             })
-            .then(() => {
-                return res.status(200).json({ user, arrOrder });
-            })
+                .then(() => {
+                    return res.status(200).json({ user, arrOrder });
+                })
         })
     });
 })
@@ -74,7 +82,7 @@ router.post('/register', (req, res) => {
             jwt.sign(
                 { id: user.id },
                 config.get('jwtSecret'),
-                {expiresIn: 3600},
+                { expiresIn: 3600 },
                 (err, token) => {
                     if (err) throw err;
                     res.status(200).json({

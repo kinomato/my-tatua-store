@@ -17,7 +17,7 @@ const initialState = {
 }
 export default function (state = initialState, action) {
     switch (action.type) {
-        case GET_USERS_COUNT: 
+        case GET_USERS_COUNT:
             return {
                 ...state,
                 count: action.payload
@@ -25,19 +25,19 @@ export default function (state = initialState, action) {
         case GET_USERS:
             return {
                 ...state,
-                users:action.payload,
+                users: action.payload,
                 loading: false
             }
         case GET_USER:
             return {
                 ...state,
-                userCT:action.payload,
-                loading:false
+                userCT: action.payload,
+                loading: false
             }
         case ADD_USER:
             return {
                 ...state,
-                users: [action.payload,...state.users]
+                users: [action.payload, ...state.users]
             }
         case DELETE_USER:
             return {
