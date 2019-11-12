@@ -1,24 +1,25 @@
 import React, { Component, Fragment } from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Container, Button, Table, ButtonGroup } from 'react-bootstrap'
-import {  BeatLoader } from 'react-spinners';
+import { BeatLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getProducts } from '../../actions/productAction';
+import { getProducts, updateProduct } from '../../../actions/productAction';
 
 class ProductList extends Component {
 
     static propTypes = {
         products: PropTypes.array.isRequired,
         getProducts: PropTypes.func.isRequired,
+        updateProduct: PropTypes.func.isRequired,
         loading: PropTypes.bool.isRequired,
         error: PropTypes.object.isRequired
     }
     componentDidMount() {
         this.props.getProducts();
+        // this.props.updateProduct();
     }
-
     render() {
         const { products } = this.props;
         const loading = (
@@ -36,7 +37,7 @@ class ProductList extends Component {
                     const { _id, prodName, prodPrize, isDeleted } = product;
 
                     return (
-                        <tr key = {_id}>
+                        <tr key={_id}>
                             {/* <td>{1}</td>
                             <td>{_id}</td> */}
                             <td>{prodName}</td>
@@ -45,11 +46,14 @@ class ProductList extends Component {
 
                             <td>
                                 <ButtonGroup aria-label="Basic example">
-                                    <Button variant="secondary">Detail</Button>
-                                    <Button variant="danger">Del</Button>
+                                    <Button variant="secondary">
+                                        <Link to={`/admin/products/${_id}`} style={{textDecoration:'none',color:'white'}}>
+                                            Detail
+                                        </Link>
+                                    </Button>
+                                    <Button variant="danger" onClick="handleDelete">Del</Button>
+                                    <Button variant="primary" onClick="handlUpdate">Update</Button>
                                 </ButtonGroup>
-
-
                             </td>
 
                         </tr>
@@ -87,4 +91,4 @@ const mapStateToProps = state => ({
     loading: state.product.loading,
     error: state.error
 })
-export default connect(mapStateToProps, { getProducts })(ProductList)
+export default connect(mapStateToProps, { getProducts, updateProduct })(ProductList)

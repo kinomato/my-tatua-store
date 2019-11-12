@@ -33,33 +33,42 @@ router.get('/', (req, res) => {
     })
         .catch(err => res.status(400).json({ msg: `something gone wrong: ${err}` }))
 })
+
 router.get("/:id", (req, res) => {
 
-    let arrOrder = [];
+    // let arrOrder = [];
+    // User.findById(req.params.id, (err, user) => {
+    //     if (err) throw err;
+    //     // lấy mảng orders trong user
+    //     const donHangs = user.get('donHangs');
+    //     // dùng operator map để truy cập vào từng biến của mảng
+    //     return donHangs.map(iddh => {
+    //         // tìm đơn hàng thông qua id trong mảng donhangs
+    //         return Order.findById(iddh, (err, donHang) => {
+    //             if (err) throw err;
+    //             // gán mảng được tạo ở trên
+    //             arrOrder = [...arrOrder, donHang];
+    //         })
+    //             .then(() => {
+    //                 return res.status(200).json({ user, arrOrder });
+    //             })
+    //     })
+    // });
     User.findById(req.params.id, (err, user) => {
-        if (err) throw err;
-        // lấy mảng orders trong user
-        const donHangs = user.get('donHangs');
-        // dùng operator map để truy cập vào từng biến của mảng
-        return donHangs.map(iddh => {
-            // tìm đơn hàng thông qua id trong mảng donhangs
-            return Order.findById(iddh, (err, donHang) => {
-                if (err) throw err;
-                // gán mảng được tạo ở trên
-                arrOrder = [...arrOrder, donHang];
-            })
-                .then(() => {
-                    return res.status(200).json({ user, arrOrder });
-                })
-        })
-    });
+        if (err) {
+            res.status(400).json({ msg: `Somethings went wrong: ${err}` })
+        }
+        res.json(user)
+
+    })
+        .catch(err => res.status(400).json({ msg: `something gone wrong: ${err}` }))
 })
 
 
 
 router.post('/register', (req, res) => {
     const _id = mongoose.Types.ObjectId();
-    const { userName,userEmail,userPassword,userPhone } = req.body;
+    const { userName, userEmail, userPassword, userPhone } = req.body;
     if (!userName || !userEmail || !userPassword || !userPhone) {
         return res.status(400).json({ msg: 'Vui lòng nhập đầy đủ field' })
     }
@@ -70,12 +79,12 @@ router.post('/register', (req, res) => {
         // console.log(date);
         const newUser = new User({
             _id,
-            userName:userName,
-            userEmail:userEmail,
-            userPhone:userPhone,
-            userGender:'',
-            userAddress:'',
-            userPassword:userPassword,
+            userName: userName,
+            userEmail: userEmail,
+            userPhone: userPhone,
+            userGender: '',
+            userAddress: '',
+            userPassword: userPassword,
             priority: 0
         });
         newUser.save().then(user => {

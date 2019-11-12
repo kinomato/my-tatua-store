@@ -7,9 +7,6 @@ const ToppingSchema = schema({
         type:String,
         require:true
     },
-    toppAmount:{
-        type:Number,
-    },
     toppPrize:{
         type:String,
         require:true

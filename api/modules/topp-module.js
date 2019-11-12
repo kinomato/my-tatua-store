@@ -9,9 +9,9 @@ const Topping = require('../models/topping-model');
 // @access public
 // lấy tổng số document user
 router.get("/", (req, res) => {
-    Topping.find({},(err,data) => {
-        if(err)
-        return res.status(400).json({msg:`lỗi ${err}`});
+    Topping.find({}, (err, data) => {
+        if (err)
+            return res.status(400).json({ msg: `lỗi ${err}` });
         res.json(data);
     })
 })
@@ -25,6 +25,24 @@ router.get('/:id', (req, res) => {
         // console.log(req.params.id);
         res.json(topping);
     }).catch(err => res.status(400).json({ msg: `something gone wrong: ${err}` }))
+})
+
+//Edit topping
+router.put('/update/:id', (req, res) => {
+    Topping.findById(req.params.id, (err, topping) => {
+        if ((req.body.toppName !== undefined) && (req.body.toppPrize !== undefined)) {
+            topping.toppName = req.body.toppName
+            topping.toppPrize = req.body.toppPrize
+        }
+        // if (req.body.toppPrize !== undefined) {
+        //     topping.toppPrize = req.body.toppPrize
+        // }
+        topping.save().then(topping=>{
+            res.json('object updated successfully: ' + topping);
+        }).catch(err=>{
+            res.status(400).send("unable to update data: " + err);
+        });
+    })
 })
 
 

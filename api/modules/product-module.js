@@ -6,6 +6,7 @@ const Product = require('../models/product-model');
 router.get('/:id', (req, res) => {
     Product.findById(req.params.id, (err, product) => {
         if (err) {
+            console.log(err)
             res.status(400).json({ msg: `something gone wrong: ${err}` })
         }
         // console.log(req.params.id);
@@ -28,12 +29,15 @@ router.get('/', (req, res) => {
 
 //Edit 1 product
 router.put('/update/:id', (req, res) => {
-    Product.findById(req.params.id, (req, product) => {
+    console.log(req.body)
+    Product.findById(req.params.id, (err, product) => {
         if (req.body.prodName !== undefined) {
+            console.log(req.body.prodName)
             product.prodName = req.body.prodName
         }
 
         if (req.body.prodPrize !== undefined) {
+            console.log(req.body.prodPrize)
             product.prodPrize = req.body.prodPrize
         }
         if (req.body.prodURL !== undefined) {
@@ -46,6 +50,7 @@ router.put('/update/:id', (req, res) => {
         })
 
     })
+    
 })
 
 //Có thể là delete :))

@@ -4,6 +4,10 @@ import { returnErrors } from './errorAction';
 import {
     GET_PRODUCTS,
     GET_PRODUCT_FAIL,
+    ADD_PRODUCT,
+    ADD_PRODUCT_FAIL,
+    UPDATE_PRODUCT,
+    UPDATE_PRODUCT_FAIL,
     PRODUCTS_LOADING,
     GET_PRODUCT
 } from '../actions/types';
@@ -35,6 +39,23 @@ export const getProduct = (id) => (dispatch) => {
             dispatch(returnErrors(err.response.data, err.response.status, 'GET_PRODUCT_FAIL'))
             dispatch({
                 type: GET_PRODUCT_FAIL
+            })
+        })
+}
+
+export const updateProduct = (id) => (dispatch) => {
+    axios.put(`/api/move/product/update/${id}`)
+        .then(res => {
+            console.log(res);
+            dispatch({
+                type: UPDATE_PRODUCT,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status, 'UPDATE_PRODUCT_FAIL'))
+            dispatch({
+                type: UPDATE_PRODUCT_FAIL
             })
         })
 }

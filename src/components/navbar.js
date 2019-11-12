@@ -33,14 +33,21 @@ class NavigationBar extends Component {
             <>
                 <NavDropdown title='Manage' id="basic-nav-dropdown">
                     <NavDropdown.Item>
-                        asd
-                            </NavDropdown.Item>
+                        <Link to={'/admin/users'} style={{textDecoration:'none',color:'black'}}>Manage user</Link>
+                    </NavDropdown.Item>
                     <NavDropdown.Item>
-                        asd
-                            </NavDropdown.Item>
-                    <NavDropdown.Item>Something</NavDropdown.Item>
+                        <Link to={'/admin/products'} style={{textDecoration:'none',color:'black'}}>Manage product</Link>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item>
+                        <Link to={'/admin/toppings'} style={{textDecoration:'none',color:'black'}}>Manage topping</Link>
+                    </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item >asd</NavDropdown.Item>
+                    <NavDropdown.Item >
+                        About
+                    </NavDropdown.Item>
+                    <NavDropdown.Item >
+                        Help
+                    </NavDropdown.Item>
                 </NavDropdown>
 
             </>

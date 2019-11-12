@@ -3,24 +3,23 @@ import { Container, Button, Table, ButtonGroup } from 'react-bootstrap'
 import { BeatLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-import { getUsers } from '../../../actions/userAction';
+import { getToppings } from '../../../actions/toppingAction'
 
-class UserList extends Component {
-
+class ToppingList extends Component {
     static propTypes = {
-        users: PropTypes.array.isRequired,
-        getUser: PropTypes.func.isRequired,
+        toppings: PropTypes.array.isRequired,
+        getToppings: PropTypes.func.isRequired,
         loading: PropTypes.bool.isRequired,
         error: PropTypes.object.isRequired
     }
     componentDidMount() {
-        this.props.getUsers();
+        this.props.getToppings();
     }
 
     render() {
-        const { users } = this.props;
+        const { topps } = this.props;
         const loading = (
             <Fragment>
                 <td colSpan='5' align='center'>
@@ -30,27 +29,22 @@ class UserList extends Component {
                 </td>
             </Fragment>
         )
+
         const loaded = (
             <Fragment>
-                {users !== null ? users.map(user => {
-                    const { _id, userName, userEmail, userAddress, userPhone, userGenre, userPassword } = user;
+                {topps !== null ? topps.map(topping => {
+                    const { _id, toppName, toppPrize } = topping;
 
                     return (
                         <tr key={_id}>
-                            {/* <td>{1}</td>
-                            <td>{_id}</td> */}
-                            <td>{userName}</td>
-                            <td>{userEmail}</td>
-                            <td>{userAddress}</td>
-                            <td>{userPhone}</td>
-                            <td>{userGenre}</td>
-                            <td>{userPassword}</td>
+                            <td>{toppName}</td>
+                            <td>{toppPrize}</td>
                             {/* <td>{isDeleted ? 'Unvailable' : 'Available'}</td> */}
 
                             <td>
                                 <ButtonGroup aria-label="Basic example">
                                     <Button variant="secondary">
-                                        <Link to={`/admin/users/${_id}`} style={{textDecoration:'none',color:'white'}}>
+                                        <Link to={`/admin/toppings/${_id}`} style={{textDecoration:'none',color:'white'}}>
                                             Detail
                                         </Link>
                                     </Button>
@@ -66,18 +60,16 @@ class UserList extends Component {
                 }) : null}
             </Fragment>
         )
+
         return (
             <Container>
                 <div className="row">
                     <Table striped bordered hover variant="dark">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Address</th>
-                                <th>Phone</th>
-                                <th>Genre</th>
-                                <th>Password</th>
+                                <th>Topping Name</th>
+                                <th>Topping prize (VND)</th>
+                                {/* <th>Status</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -90,13 +82,12 @@ class UserList extends Component {
 
                 </div>
             </Container>
-
         )
     }
 }
 const mapStateToProps = state => ({
-    users: state.user.users,
-    loading: state.user.loading,
+    topps: state.topping.topps,
+    loading: state.topping.loading,
     error: state.error
 })
-export default connect(mapStateToProps, { getUsers })(UserList)
+export default connect(mapStateToProps, { getToppings })(ToppingList)

@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 })
 //update
 router.put('/update/:id', (req, res) => {
-    Promo.findById(req.params.id, (req, promo) => {
+    Promo.findById(req.params.id, (err, promo) => {
         if (req.body.promoName !== undefined) {
             promo.promoName = req.body.promoName
         }
@@ -38,6 +38,17 @@ router.put('/update/:id', (req, res) => {
         }).catch(err => {
             res.status(400).send("unable to update data: " + err);
         })
+
+    })
+})
+router.put('/delete/:id', (req, res) => {
+    Promo.findById(req.params.id, (err, promo) => {
+        promo.isDeleted = true;
+        promo.save().then(() => {
+            res.json('Delete promo is successful');
+        }).catch(err => {
+            res.status(400).send("err" + err); 
+        });
 
     })
 })
