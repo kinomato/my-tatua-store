@@ -5,13 +5,14 @@ import { BeatLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getProducts, updateProduct } from '../../../actions/productAction';
+import { getProducts, updateProduct, deleteProduct } from '../../../actions/productAction';
 
 class ProductList extends Component {
 
     static propTypes = {
         products: PropTypes.array.isRequired,
         getProducts: PropTypes.func.isRequired,
+        deleteProduct: PropTypes.func.isRequired,
         updateProduct: PropTypes.func.isRequired,
         loading: PropTypes.bool.isRequired,
         error: PropTypes.object.isRequired
@@ -19,6 +20,9 @@ class ProductList extends Component {
     componentDidMount() {
         this.props.getProducts();
         // this.props.updateProduct();
+    }
+    deleteProduct(){
+        this.props.action.deleteProduct(this.state.products)
     }
     render() {
         const { products } = this.props;
@@ -47,11 +51,11 @@ class ProductList extends Component {
                             <td>
                                 <ButtonGroup aria-label="Basic example">
                                     <Button variant="secondary">
-                                        <Link to={`/admin/products/${_id}`} style={{textDecoration:'none',color:'white'}}>
+                                        <Link to={`/admin/products/${_id}`} style={{ textDecoration: 'none', color: 'white' }}>
                                             Detail
                                         </Link>
                                     </Button>
-                                    <Button variant="danger" onClick="handleDelete">Del</Button>
+                                    <Button variant="danger" onClick={()=>deleteProduct()}>Del</Button>
                                     <Button variant="primary" onClick="handlUpdate">Update</Button>
                                 </ButtonGroup>
                             </td>

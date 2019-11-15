@@ -7,6 +7,8 @@ import {
     ADD_PRODUCT,
     ADD_PRODUCT_FAIL,
     UPDATE_PRODUCT,
+    DELETE_PRODUCT,
+    DELETE_PRODUCT_FAIL,
     UPDATE_PRODUCT_FAIL,
     PRODUCTS_LOADING,
     GET_PRODUCT
@@ -56,6 +58,22 @@ export const updateProduct = (id) => (dispatch) => {
             dispatch(returnErrors(err.response.data, err.response.status, 'UPDATE_PRODUCT_FAIL'))
             dispatch({
                 type: UPDATE_PRODUCT_FAIL
+            })
+        })
+}
+export const deleteProduct = (id) => (dispatch) => {
+    axios.put(`/api/move/product/delete/${id}`)
+        .then(res => {
+            console.log(res);
+            dispatch({
+                type: DELETE_PRODUCT,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status, 'UPDATE_PRODUCT_FAIL'))
+            dispatch({
+                type: DELETE_PRODUCT_FAIL
             })
         })
 }
