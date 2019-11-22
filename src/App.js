@@ -22,6 +22,7 @@ import UserList from './components/admin/user/userList';
 import ToppingList from './components/admin/topping/toppList';
 import ToppingDetail from './components/admin/topping/toppDetail';
 import ProductDetail from './components/admin/product/productDetail';
+import EditProduct from './components/admin/product/editProduct';
 import UserDetail from './components/admin/user/userDetail';
 
 class App extends Component {
@@ -34,11 +35,13 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <NavigationBar />
+          
           <Container fluid={true} style={{ marginTop: "1rem" }}>
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route path="/home" component={MainContent} />
-              <Route path="/admin/products/:id" component={ProductDetail}></Route>
+              <Route path="/admin/products/editProduct" component={EditProduct} /> 
+              <Route path="/admin/products/:id" component={ProductDetail}></Route>                
               <Route path="/admin/products" component={ProductList} />          
               {/* <Route path="/test/shoppinglist" component={ShoppingList} /> */}
               <Route path="/forbidden" component={AccessDenied} />

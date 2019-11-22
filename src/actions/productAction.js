@@ -15,18 +15,22 @@ import {
 } from '../actions/types';
 
 export const getProducts = () => (dispatch) => {
-    dispatch(setOrderLoading());
-    axios.get('/api/move/product')
-        .then(res => {
-            dispatch({
-                type: GET_PRODUCTS,
-                payload: res.data
-            });
-        })
-        .catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status, 'GET_PRODUCTS_FAIL'));
-
-        })
+    return new Promise((resolve, reject) => {
+        dispatch(setOrderLoading());
+        axios.get('/api/move/product')
+            .then(res => {
+                console.log("From product action : " + res.data)
+                dispatch({
+                    type: GET_PRODUCTS,
+                    payload: res.data
+                });
+                resolve()
+            })
+            .catch(err => {
+                dispatch(returnErrors(err.response.data, err.response.status, 'GET_PRODUCTS_FAIL'));
+                reject()
+            })
+    })
 }
 export const getProduct = (id) => (dispatch) => {
     dispatch(setOrderLoading());
