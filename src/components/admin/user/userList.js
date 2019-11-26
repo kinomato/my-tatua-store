@@ -9,6 +9,7 @@ import MaterialTable from 'material-table'
 import Grow from '@material-ui/core/Grow'
 import IconButton from '@material-ui/core/IconButton'
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import DetailsIcon from '@material-ui/icons/Details';
 import UpdateRoundedIcon from '@material-ui/icons/UpdateRounded';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import GoBackBtn from '../../goBackBtn';
@@ -145,19 +146,19 @@ export class UserList extends Component {
                             title="LIST USERS"
                             columns={this.state.columns}
                             data={this.state.data}
-                            // actions={[
-                            //     {
-                            //         icon: 'update',
-                            //         tooltip: 'Update User',
-                            //         handleAdd: (event, rowData) => {
-                            //             console.log(event)
-                            //         },
-                            //         handleUpdate: (event, rowData) => {
-                            //             console.log(event)
-                            //         },
-                            //         handleDelete: (event, rowData) => alert("You deleted " + rowData.name)
-                            //     }
-                            // ]}
+                            actions={[
+                                {
+                                    icon: 'update',
+                                    tooltip: 'Update User',
+                                    handleAdd: (event, rowData) => {
+                                        console.log(event)
+                                    },
+                                    handleUpdate: (event, rowData) => {
+                                        console.log(event)
+                                    },
+                                    handleDelete: (event, rowData) => alert("You deleted " + rowData.name)
+                                }
+                            ]}
                             components={{
                                 Action: props => (
                                     <>
@@ -168,7 +169,7 @@ export class UserList extends Component {
                                             style={{ textTransform: 'none', color: 'green' }}
                                             size="small"
                                         >
-                                            <AddCircleIcon />
+                                            <DetailsIcon />
                                         </IconButton>
                                         <IconButton
                                             onClick={(event) => props.action.handleUpdate(event, props.data)}

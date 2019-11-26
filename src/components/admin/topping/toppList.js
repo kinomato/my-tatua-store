@@ -1,88 +1,156 @@
-import React, { Component, Fragment } from 'react'
-import { Container, Button, Table, ButtonGroup } from 'react-bootstrap'
+import React, { Component } from 'react'
+import { Row, Container, Col, } from 'react-bootstrap'
 import { BeatLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+
+
+// import MaterialTable from '@material-ui/core/Table';
+import MaterialTable from 'material-table'
+import Grow from '@material-ui/core/Grow'
+import IconButton from '@material-ui/core/IconButton'
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import DetailsIcon from '@material-ui/icons/Details';
+import UpdateRoundedIcon from '@material-ui/icons/UpdateRounded';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import GoBackBtn from '../../goBackBtn';
+
 import { getToppings } from '../../../actions/toppingAction'
 
-class ToppingList extends Component {
+export class ToppingList extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            columns: [
+                // { title: 'ID', field: '_id' },
+                { title: 'Topping Name', field: 'toppName' },
+                { title: 'Topping Prize', field: 'toppPrize' },
+                { title: 'Status', field: 'isDeleted' }
+
+            ],
+            data: [],
+        }
+    }
     static propTypes = {
-        toppings: PropTypes.array.isRequired,
+        topps: PropTypes.array.isRequired,
         getToppings: PropTypes.func.isRequired,
         loading: PropTypes.bool.isRequired,
         error: PropTypes.object.isRequired
     }
-    componentDidMount() {
-        this.props.getToppings();
+    async componentDidMount() {
+        await this.props.getToppings()
+            .then(() => {
+                const { topps } = this.props;
+                console.log(topps)
+                let newTopps = [];
+                topps.forEach(topping => {
+                    const newTopp = {
+                        _id: topping._id,
+                        toppName: topping.toppName,
+                        toppPrize: topping.toppPrize,
+                        isDeleted: topping.isDeleted ? 'Deleted' : 'Good'
+                    }
+                    newTopps = [...newTopps, newTopp];
+                });
+                this.setState({
+                    data: newTopps
+                })
+                console.log(this.state.columns)
+                console.log(this.state.data)
+            })
     }
 
     render() {
-        const { topps } = this.props;
-        const loading = (
-            <Fragment>
-                <td colSpan='5' align='center'>
-                    <BeatLoader color="#50E3C2" animation="border" role="status" style={{ height: '10vh', width: '10vh' }} >
-                        <span className="sr-only"><strong style={{ fontSize: '5vh' }}>Loading...</strong></span>
-                    </BeatLoader>
-                </td>
-            </Fragment>
-        )
+        const { data } = this.state;
+        console.log(data)
+        if (data.length > 0) {
+            return (
+                <div>
+                    <Row>
+                        <GoBackBtn></GoBackBtn>
+                    </Row>
+                    <Grow in={true}>
+                        <MaterialTable style={{ marginTop: '5vh' }}
+                            title="LIST TOPPING"
+                            columns={this.state.columns}
+                            data={this.state.data}
+                            actions={[
+                                {
+                                    // icon: 'update',
+                                    // tooltip: 'Update Product',
+                                    handleAdd: (event, rowData) => {
+                                        console.log(event)
+                                    },
+                                    handleUpdate: (event, rowData) => {
+                                        console.log(event)
+                                    },
+                                    handleDelete: (event, rowData) => alert("You deleted " + rowData.name)
+                                }
+                            ]}
+                            components={{
+                                Action: props => (
+                                    <>
+                                        <IconButton
+                                            onClick={(event) => props.action.handleAdd(event, props.data)}
+                                            color="primary"
+                                            variant="contained"
+                                            style={{ textTransform: 'none', color: 'green' }}
+                                            size="small"
+                                        >
+                                            <Link to={`/admin/toppings/${data._id}`}>
+                                                <DetailsIcon />
+                                            </Link>
 
-        const loaded = (
-            <Fragment>
-                {topps !== null ? topps.map(topping => {
-                    const { _id, toppName, toppPrize } = topping;
+                                        </IconButton>
+                                        <IconButton
+                                            onClick={(event) => props.action.handleUpdate(event, props.data)}
+                                            color="primary"
+                                            variant="contained"
+                                            style={{ textTransform: 'none', color: 'blue' }}
+                                            size="small"
+                                        >
+                                            <Link to={'/admin/products/editProduct'}><UpdateRoundedIcon /></Link>
 
-                    return (
-                        <tr key={_id}>
-                            <td>{toppName}</td>
-                            <td>{toppPrize}</td>
-                            {/* <td>{isDeleted ? 'Unvailable' : 'Available'}</td> */}
+                                        </IconButton>
+                                        <IconButton
+                                            onClick={(event) => props.action.handleDelete(event, props.data)}
+                                            color="primary"
+                                            variant="contained"
+                                            style={{ textTransform: 'none', color: 'red' }}
+                                            size="small"
+                                        >
+                                            <HighlightOffIcon />
+                                        </IconButton>
+                                    </>
 
-                            <td>
-                                <ButtonGroup aria-label="Basic example">
-                                    <Button variant="secondary">
-                                        <Link to={`/admin/toppings/${_id}`} style={{textDecoration:'none',color:'white'}}>
-                                            Detail
-                                        </Link>
-                                    </Button>
-                                    <Button variant="danger">Del</Button>
-                                    <Button variant="primary">Update</Button>
-                                </ButtonGroup>
+                                )
+                            }}
+                        />
+                    </Grow>
 
-
-                            </td>
-
-                        </tr>
-                    )
-                }) : null}
-            </Fragment>
-        )
-
-        return (
-            <Container>
-                <div className="row">
-                    <Table striped bordered hover variant="dark">
-                        <thead>
-                            <tr>
-                                <th>Topping Name</th>
-                                <th>Topping prize (VND)</th>
-                                {/* <th>Status</th> */}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {!this.props.loading ? loaded : loading}
-                        </tbody>
-                    </Table>
 
                 </div>
-                <div className="row">
-
-                </div>
-            </Container>
-        )
+            )
+        }
+        else {
+            return (
+                <Container>
+                    <Row style={{ marginTop: '13rem' }} className='justify-content-md-center'>
+                        <Col xs lg='2'></Col>
+                        <Col md='auto'>
+                            <div style={{ float: 'center' }}>
+                                <BeatLoader color="#50E3C2" animation="border" role="status" style={{ height: '10vh', width: '10vh' }} >
+                                    <span className="sr-only"><strong style={{ fontSize: '5vh' }}>Loading...</strong></span>
+                                </BeatLoader>
+                            </div>
+                        </Col>
+                        <Col xs lg='2'></Col>
+                    </Row>
+                </Container>
+            )
+        }
     }
 }
 const mapStateToProps = state => ({
@@ -90,4 +158,7 @@ const mapStateToProps = state => ({
     loading: state.topping.loading,
     error: state.error
 })
-export default connect(mapStateToProps, { getToppings })(ToppingList)
+const mapDispatchToProps = {
+    getToppings
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ToppingList)

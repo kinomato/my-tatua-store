@@ -10,6 +10,7 @@ import MaterialTable from 'material-table'
 import Grow from '@material-ui/core/Grow'
 import IconButton from '@material-ui/core/IconButton'
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import DetailsIcon from '@material-ui/icons/Details';
 import UpdateRoundedIcon from '@material-ui/icons/UpdateRounded';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import GoBackBtn from '../../goBackBtn';
@@ -99,7 +100,7 @@ export class ProductList extends Component {
                                             style={{ textTransform: 'none', color: 'green' }}
                                             size="small"
                                         >
-                                            <AddCircleIcon />
+                                            <DetailsIcon />
                                         </IconButton>
                                         <IconButton
                                             onClick={(event) => props.action.handleUpdate(event, props.data)}

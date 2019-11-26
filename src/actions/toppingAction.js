@@ -8,22 +8,26 @@ import {
     ADD_CART_TOPP,
     REMOVE_CART_TOPP,
     CLEAR_CART_TOPPS,
-    CALCULATE_TONGTIEN_TOPP
+    CALCULATE_TONGTIEN_TOPP,
+    ADD_TOPPING
 } from '../actions/types';
 
 export const getToppings = () => (dispatch) => {
-    dispatch(setToppLoading());
-    axios.get('/api/move/topp')
-        .then(res => {
-            dispatch({
-                type: GET_TOPPINGS,
-                payload: res.data
-            });
-        })
-        .catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status, 'GET_TOPPINGS_FAIL'));
-
-        })
+    return new Promise((resolve, reject) => {
+        dispatch(setToppLoading());
+        axios.get('/api/move/topp')
+            .then(res => {
+                dispatch({
+                    type: GET_TOPPINGS,
+                    payload: res.data
+                });
+                resolve()
+            })
+            .catch(err => {
+                dispatch(returnErrors(err.response.data, err.response.status, 'GET_TOPPINGS_FAIL'));
+                reject()
+            })
+    })
 }
 export const getTopping = (id) => (dispatch) => {
     axios.get(`/api/move/topp/${id}`)
@@ -35,7 +39,17 @@ export const getTopping = (id) => (dispatch) => {
         })
         .catch(err => {
             dispatch(returnErrors(err.response.data, err.response.status, 'GET_TOPPING_FAIL'));
-
+        })
+}
+export const addTopping = () => (dispatch) => {
+    axios.post('/api/move/topp/add')
+        .then(res => {
+            dispatch({
+                type: ADD_TOPPING,
+                payload: res.data
+            });
+        }).catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status, 'ADD_TOPPING_FAIL'));
         })
 }
 export const addCartTopp = (topp, carttopps) => dispatch => {

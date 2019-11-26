@@ -39,19 +39,25 @@ export const getUsersCount = () => (dispatch) => {
         })
 }
 export const getUsers = () => (dispatch) => {
-    dispatch(setUserLoading())
+    return new Promise((resolve, reject) => {
+        dispatch(setUserLoading())
     axios.get('/api/move/user').then(res => {
         dispatch({
             type: GET_USERS,
             payload: res.data
         });
+        resolve()
     })
         .catch(err => {
             dispatch(returnErrors(err.response.data, err.response.status, 'GET_USERS_FAIL'))
             dispatch({
                 type: GET_USERS_FAIL
             })
+            reject()
         })
+    })
+    
+        
 }
 export const getUser = (id) => (dispatch) => {
     axios.get(`/api/move/user/${id}`).then(res => {
