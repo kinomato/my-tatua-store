@@ -13,8 +13,11 @@ import {
 // return errors
 export const getCartItems = () => dispatch => {
     const temp = localStorage.getItem("cart")
-    const localcart = temp === '' ?  []:JSON.parse(temp);
-    
+    let localcart = [];
+    if(temp !== null) { // phải kiểm tra null vì vào lần chạy đầu tiên cart vẫn chưa có trong localstore
+        localcart = temp === '' ?  []:JSON.parse(temp);
+
+    }
     dispatch({
         type: GET_ITEM_CART,
         payload: localcart
