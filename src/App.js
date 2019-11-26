@@ -11,13 +11,14 @@ import MainContent from './components/mainContent';
 import AccessDenied from './components/accessDenied';
 import Usercontent from './components/user/usercontent'
 import Tst from './components/tst'
-
+import CheckoutScreenKai from './components/order/checkoutScreenKai'
 import { loadUser } from './actions/authAction';
 import { getCartItems } from './actions/cartAction';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import ProductList from './components/product/productList';
+import checkoutScreenKai from './components/order/checkoutScreenKai';
 
 class App extends Component {
   componentDidMount() {
@@ -37,6 +38,7 @@ class App extends Component {
               {/* <Route path="/test/shoppinglist" component={ShoppingList} /> */}
               <Route path="/forbidden" component={AccessDenied} />
               <Route path="/test" component={Tst} />
+              <Route path="/checkoutscreen" component={CheckoutScreenKai} />
               <UserRoute path="/account" component={Usercontent} />
               {/* <PrivateRoute path="/admin/orders/:id" component={OrderDetail}/>
               <PrivateRoute path="/admin/orders" component={Order}/>

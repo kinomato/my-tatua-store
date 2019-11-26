@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button,Badge,ListGroup, Modal, Form, Image, Container, Row, Col } from 'react-bootstrap'
 import Checkout from '../paypal/checkout';
+import Checkoutv2 from '../paypal/checkoutv2'
 export class CheckoutScreen extends Component {
     constructor(props) {
         super(props);
@@ -77,6 +78,7 @@ export class CheckoutScreen extends Component {
 
                     <Modal.Footer>
                         <Checkout />
+                        <Checkoutv2/>
                     </Modal.Footer>
                 </Modal>
             </>
