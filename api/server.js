@@ -15,6 +15,7 @@ const user = require('./modules/user-module');
 const product =require('./modules/product-module');
 const promo =require('./modules/promo-module');
 const topp = require('./modules/topp-module');
+const order = require('./modules/order-module');
 
 // const mongoClient = require('mongodb').MongoClient;
 const dbdat = config.get('mongoUrlDat');
@@ -41,6 +42,7 @@ app.use('/api/move/auth', auth);
 app.use('/api/move/product',product);
 app.use('/api/move/promo',promo);
 app.use('/api/move/topp',topp)
+app.use('/api/move/order',order)
 // app.use('/api/move/driver', driver);
 // app.use('/api/move/paytype', paytype);
 

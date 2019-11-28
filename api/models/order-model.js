@@ -3,32 +3,32 @@ const schema = mongoose.Schema;
 
 const OrderSchema = new schema({
     _id: { type: String },
-    user: {
+    userId: {
         type: schema.Types.ObjectId,
         ref: 'user'
     },
     deliveryDate: {
         type: Date,
-        required: true
+        
     },
     recievedDate: {
         type: Date,
-        required: true
+        
     },
-    product: {
-        type: schema.Types.ObjectId,
-        ref: 'product'
-    },
-    topp: {
-        toppName: {
-            type: String,
-            require:true
-        },
-        toppPrize:{
-            type:String,
-            require:true
+    items: [
+        {
+            id:{type:String},
+            sl:{type:Number},
+            tongtien:{type:Number},
+            product: {
+                type: Object
+            },
+            topps: {
+               type:Array
+            },
         }
-    },
+        
+    ],
     prizeOrigin:{
         type:String,
         require:true
@@ -36,8 +36,9 @@ const OrderSchema = new schema({
     prizeWithPromo:{
         type:String,
         require:true
-    }
-
+    },
+    create_time: {type:Date},
+    orderID: {type:String}
 })
 
 const Order = mongoose.model('Order', OrderSchema, 'order');

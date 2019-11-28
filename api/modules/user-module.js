@@ -103,6 +103,7 @@ router.post('/register', (req, res) => {
                             userEmail: user.userEmail,
                             userGender: user.userGender,
                             userAddress: user.userAddress,
+                            orders: user.orders,
                             priority: user.priority
                         }
                     })
@@ -164,5 +165,18 @@ router.put('/update/:id', (req, res) => {
 
     })
 })
-
+router.put('/saveorderid',(req,res) => {
+    const {uid,oid} = req.body;
+    if(!uid || !oid) {
+        res.status(400).json({msg:"missing data"});
+    }
+    User.findByIdAndUpdate(oid,
+        {$push: {"orders":oid}})
+        .then(() => {
+            res.status(200).json({msg:"succeed", oid:oid})
+        })
+        .catch(reason => {
+            res.status(400).json({reason})
+        })
+})
 module.exports = router;

@@ -40,6 +40,7 @@ router.post('/login', (req, res) => {
                         userEmail: user.userEmail,
                         userGender: user.userGender,
                         userAddress: user.userAddress,
+                        orders: user.orders,
                         priority: user.priority
                     }
                 })

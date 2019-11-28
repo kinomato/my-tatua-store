@@ -3,6 +3,8 @@ import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import NavigationBar from './components/navbar';
 // import PrivateRoute from './components/privateRoute';
@@ -33,10 +35,12 @@ class App extends Component {
   }
   render() {
     return (
+      
       <Provider store={store}>
         <div className="App">
-          <NavigationBar />
           
+          <NavigationBar />
+          <ToastContainer />
           <Container fluid={true} style={{ marginTop: "1rem" }}>
             <Switch>
               <Redirect exact from="/" to="/home" />

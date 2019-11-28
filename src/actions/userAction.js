@@ -10,15 +10,18 @@ import {
     // USERS_LOADING,
     GET_USER,
     GET_USER_FAIL,
-    ADD_USER,
-    ADD_USER_FAIL,
+    // ADD_USER,
+    // ADD_USER_FAIL,
     UPDATE_USER,
     UPDATE_USER_FAIL,
-    DELETE_USER,
-    DELETE_USER_FAIL,
+    // DELETE_USER,
+    // DELETE_USER_FAIL,
     GET_USERS_FAIL,
     GET_USERS_COUNT,
-    USERS_LOADING
+    USERS_LOADING,
+    SAVE_ORDER,
+    SAVE_ORDER_FAIL,
+    LOAD_USER_ORDERS
 
 } from '../actions/types';
 
@@ -89,7 +92,47 @@ export const updateUser = (id) => (dispatch) => {
             })
         })
 }
-
+export const loadUserOrders = (orders) => async dispatch => {
+    dispatch({
+        type:LOAD_USER_ORDERS,
+        payload: orders
+    })
+}
+export const saveOrder =  (orderData,uid) => async dispatch => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    
+    const body = JSON.stringify(orderData);
+    const respond = await axios.post('http://localhost:8000/api/move/order/saveorder',body,config);
+    try {
+        const {id} = respond;
+        const newUserdata = {
+            uid,
+            oid:id
+        }
+        const body = JSON.stringify(newUserdata);
+        const respond1 = await axios.put('http://localhost:8000/api/move/user/saveorderid',body,config)
+        try {
+            const {oid} = respond1;
+            dispatch({
+                type:SAVE_ORDER,
+                payload:oid
+            })
+        } catch (error) {
+            dispatch({
+                type:SAVE_ORDER_FAIL,
+            })
+        }
+        
+    } catch (error) {
+        dispatch({
+            type:SAVE_ORDER_FAIL,
+        })
+    }
+}
 export const setUserLoading = () => {
     return {
         type: USERS_LOADING
