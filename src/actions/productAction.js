@@ -3,31 +3,34 @@ import { returnErrors } from './errorAction';
 
 import {
     GET_PRODUCTS,
-    // ADD_PRODUCT,
-    // DELETE_PRODUCT,
-    // GET_ERRORS,
-    // GET_PRODUCTS_FAIL,
     GET_PRODUCT_FAIL,
+    ADD_PRODUCT,
+    ADD_PRODUCT_FAIL,
+    UPDATE_PRODUCT,
+    DELETE_PRODUCT,
+    DELETE_PRODUCT_FAIL,
+    UPDATE_PRODUCT_FAIL,
     PRODUCTS_LOADING,
-    GET_PRODUCT,
-    // GET_PRODUCTS_COUNT,
-    // GET_PRODUCTS_COUNTC,
-    // GET_PRODUCT_CHART_DATA
+    GET_PRODUCT
 } from '../actions/types';
 
 export const getProducts = () => (dispatch) => {
-    dispatch(setOrderLoading());
-    axios.get('/api/move/product')
-        .then(res => {
-            dispatch({
-                type: GET_PRODUCTS,
-                payload: res.data
-            });
-        })
-        .catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status, 'GET_PRODUCTS_FAIL'));
-
-        })
+    return new Promise((resolve, reject) => {
+        dispatch(setOrderLoading());
+        axios.get('/api/move/product')
+            .then(res => {
+                console.log("From product action : " + res.data)
+                dispatch({
+                    type: GET_PRODUCTS,
+                    payload: res.data
+                });
+                resolve()
+            })
+            .catch(err => {
+                dispatch(returnErrors(err.response.data, err.response.status, 'GET_PRODUCTS_FAIL'));
+                reject()
+            })
+    })
 }
 export const getProduct = (id) => (dispatch) => {
     dispatch(setOrderLoading());
@@ -42,6 +45,39 @@ export const getProduct = (id) => (dispatch) => {
             dispatch(returnErrors(err.response.data, err.response.status, 'GET_PRODUCT_FAIL'))
             dispatch({
                 type: GET_PRODUCT_FAIL
+            })
+        })
+}
+
+export const updateProduct = (id) => (dispatch) => {
+    axios.put(`/api/move/product/update/${id}`)
+        .then(res => {
+            console.log(res);
+            dispatch({
+                type: UPDATE_PRODUCT,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status, 'UPDATE_PRODUCT_FAIL'))
+            dispatch({
+                type: UPDATE_PRODUCT_FAIL
+            })
+        })
+}
+export const deleteProduct = (id) => (dispatch) => {
+    axios.put(`/api/move/product/delete/${id}`)
+        .then(res => {
+            console.log(res);
+            dispatch({
+                type: DELETE_PRODUCT,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status, 'UPDATE_PRODUCT_FAIL'))
+            dispatch({
+                type: DELETE_PRODUCT_FAIL
             })
         })
 }

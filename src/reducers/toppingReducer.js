@@ -3,8 +3,9 @@ import {
     TOPPINGS_LOADING,
     GET_TOPPING,
     GET_TOPPINGS,
-    // GET_TOPPINGS_FAIL,
-    // DELETE_TOPPING,
+    GET_TOPPINGS_FAIL,
+    GET_TOPPING_FAIL,
+    DELETE_TOPPING,
     ADD_CART_TOPP,
     REMOVE_CART_TOPP,
     CLEAR_CART_TOPPS,
@@ -44,6 +45,10 @@ export default function (state = initialState, action) {
         return {
             ...state,
             carttopps: [...action.payload]
+        }
+        case DELETE_TOPPING: 
+        return {
+            ...state,
         }
         case REMOVE_CART_TOPP: 
         return {

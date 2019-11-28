@@ -2,6 +2,8 @@ import {
     GET_PRODUCTS,
     GET_PRODUCT,
     ADD_PRODUCT,
+    UPDATE_PRODUCT,
+    UPDATE_PRODUCT_FAIL,
     DELETE_PRODUCT,
     GET_PRODUCTS_FAIL,
     GET_PRODUCT_FAIL,
@@ -40,6 +42,11 @@ export default function (state = initialState, action) {
                 ...state,
                 products: [action.payload, ...state.products]
             }
+        case UPDATE_PRODUCT:
+            return {
+                ...state,
+                // products: [action.payload, ...state.products]
+            }
         case DELETE_PRODUCT:
             return {
                 ...state
@@ -51,6 +58,7 @@ export default function (state = initialState, action) {
             }
 
         case GET_PRODUCTS_FAIL:
+        case UPDATE_PRODUCT_FAIL:
         case GET_PRODUCT_FAIL:
             return {
                 ...state,

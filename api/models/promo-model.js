@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PromoSchema= new Schema({
     _id:{type:String},
-    promo:  {
+    promoName:  {
         type: String,
         require: true
     },

@@ -1,5 +1,5 @@
 import currency from 'currency.js';
-import { 
+import {
     ADD_ITEM_CART,
     DELETE_ITEM_CART,
     GET_ITEM_CART,
@@ -14,10 +14,11 @@ import {
 export const getCartItems = () => dispatch => {
     const temp = localStorage.getItem("cart")
     let localcart = [];
-    if(temp !== null) { // phải kiểm tra null vì vào lần chạy đầu tiên cart vẫn chưa có trong localstore
-        localcart = temp === '' ?  []:JSON.parse(temp);
-
+    if (temp !== null) {
+        localcart = temp === '' ? [] : JSON.parse(temp);
     }
+
+
     dispatch({
         type: GET_ITEM_CART,
         payload: localcart
@@ -25,7 +26,7 @@ export const getCartItems = () => dispatch => {
     dispatch(calculate(localcart))
 }
 
-export const incrCartItem = (cart) => dispatch=> {
+export const incrCartItem = (cart) => dispatch => {
     dispatch(calculate(cart))
     dispatch({
         type: INCR_ITEM_CART,
@@ -33,30 +34,30 @@ export const incrCartItem = (cart) => dispatch=> {
     })
 }
 // clear errors
-export const addCartItem = (item,cart) => dispatch => {
-    const newcart = [item,...cart];
+export const addCartItem = (item, cart) => dispatch => {
+    const newcart = [item, ...cart];
     dispatch(calculate(newcart))
     dispatch({
         type: ADD_ITEM_CART,
         payload: newcart
     })
-     
+
 }
 
-export const deleteCartItem = (id,cart)=> dispatch => {
+export const deleteCartItem = (id, cart) => dispatch => {
     const newcart = cart.filter(item => item.id !== id)
     dispatch(calculate(newcart))
     dispatch({
         type: DELETE_ITEM_CART,
         payload: newcart
     })
-    
+
 }
-export const increment = (id,cart) => dispatch => {
+export const increment = (id, cart) => dispatch => {
     const newcart = cart;
     newcart.forEach(item => {
-        if(item.id === id)
-        return item.sl++;
+        if (item.id === id)
+            return item.sl++;
     });
     dispatch(calculate(newcart))
     dispatch({
@@ -64,20 +65,19 @@ export const increment = (id,cart) => dispatch => {
         payload: newcart
     })
 }
-export const decrement = (id,cart) => dispatch => {
+export const decrement = (id, cart) => dispatch => {
     const newcart = cart;
     let zero = false;
     newcart.forEach(item => {
-        if(item.id === id)
-        {
-            if(item.sl === 1)
-            zero = true;
+        if (item.id === id) {
+            if (item.sl === 1)
+                zero = true;
             return item.sl--;
         }
     });
-    
-    if(zero) {
-        dispatch(deleteCartItem(id,cart))
+
+    if (zero) {
+        dispatch(deleteCartItem(id, cart))
     }
     else {
         dispatch(calculate(newcart))
@@ -86,7 +86,7 @@ export const decrement = (id,cart) => dispatch => {
             payload: newcart
         })
     }
-    
+
 }
 export const calculate = (cart) => dispatch => {
     let money = 0;
@@ -102,5 +102,5 @@ export const calculate = (cart) => dispatch => {
     dispatch({
         type: CALCULATE_TONGTIEN,
         payload: money.value
-    }) 
+    })
 }

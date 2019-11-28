@@ -17,8 +17,14 @@ import { getCartItems } from './actions/cartAction';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
-import ProductList from './components/product/productList';
-import checkoutScreenKai from './components/order/checkoutScreenKai';
+import ProductList from './components/admin/product/productList';
+import UserList from './components/admin/user/userList';
+import ToppingList from './components/admin/topping/toppList';
+import PromoList from './components/admin/promo/promoList';
+import ToppingDetail from './components/admin/topping/toppDetail';
+import ProductDetail from './components/admin/product/productDetail';
+import EditProduct from './components/admin/product/editProduct';
+import UserDetail from './components/admin/user/userDetail';
 
 class App extends Component {
   componentDidMount() {
@@ -30,15 +36,23 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <NavigationBar />
+          
           <Container fluid={true} style={{ marginTop: "1rem" }}>
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route path="/home" component={MainContent} />
-              <Route path="/admin/products" component={ProductList} />
+              <Route path="/admin/products/editProduct" component={EditProduct} /> 
+              <Route path="/admin/products/:id" component={ProductDetail}></Route>                
+              <Route path="/admin/products" component={ProductList} />          
               {/* <Route path="/test/shoppinglist" component={ShoppingList} /> */}
               <Route path="/forbidden" component={AccessDenied} />
               <Route path="/test" component={Tst} />
-              <Route path="/checkoutscreen" component={CheckoutScreenKai} />
+              <Route path="/admin/users/:id" component={UserDetail}></Route>
+              <Route path="/admin/users" component={UserList}></Route>
+              <Route path="/admin/toppings/:id" component={ToppingDetail}></Route>
+              <Route path="/admin/toppings" component={ToppingList}></Route>
+              <Route path="/admin/promos" component={PromoList}></Route>
+             
               <UserRoute path="/account" component={Usercontent} />
               {/* <PrivateRoute path="/admin/orders/:id" component={OrderDetail}/>
               <PrivateRoute path="/admin/orders" component={Order}/>

@@ -25,10 +25,10 @@ const UserSchema = schema({
         type: String,
         require: true
     },
-    userBirthDay: {
-        type: Date,
-        require: true
-    },
+    // userBirthDay: {
+    //     type: Date,
+    //     require: false
+    // },
     userPassword: {
         type: String,
         require: true
