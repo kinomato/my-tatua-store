@@ -79,6 +79,17 @@ export const UPDATE_PRODUCT_FAIL = "UPDATE_PRODUCT_FAIL";
 export const PRODUCTS_LOADING = "PRODUCTS_LOADING";
 export const GET_PRODUCTS_COUNT = "GET_PRODUCTS_COUNT"
 
+//PROMO
+export const GET_PROMOS ="GET_PROMOS";
+export const GET_PROMOS_FAIL ="GET_PROMOS_FAIL";
+export const GET_PROMO ="GET_PROMO";
+export const GET_PROMO_FAIL ="GET_PROMO_FAIL";
+export const ADD_PROMO ="ADD_PROMO";
+export const UPDATE_PROMO ="UPDATE_PROMO";
+export const DELETE_PROMO ="DELETE_PROMO";
+export const PROMOS_LOADING ="PROMOS_LOADING";
+
+
 // TEST
 export const GET_ITEMS = "GET_ITEMS";
 export const ADD_ITEM = "ADD_ITEM";

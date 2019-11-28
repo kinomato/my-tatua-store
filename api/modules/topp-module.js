@@ -32,13 +32,16 @@ router.get('/:id', (req, res) => {
 router.post('/add', (req, res) => {
     var id = mongoose.Types.ObjectId();
     const { toppName, toppPrize } = req.body;
-    // console.log(toppName);
+    console.log(toppName);
     if (toppName === undefined || toppName === '') {
         res.status(400).json({ msg: 'toppName khong duoc de trong' })
     }
     if (toppPrize === undefined || toppPrize === null) {
         res.status(400).json({ msg: 'toppPrize khong duoc de trong' })
     }
+    // if (!toppName || !toppPrize || toppName === undefined || toppName === '' || toppPrize === undefined || toppPrize === null) {
+    //     res.status(400).json({ msg: 'Cac field khong duoc de trong' })
+    // }
     var topp = new Topping({
         _id: id,
         toppName: req.body.toppName,
@@ -57,8 +60,8 @@ router.post('/add', (req, res) => {
 //Edit topping
 router.put('/update/:id', (req, res) => {
     const { toppName, toppPrize } = req.body;
-    if (!toppName||!toppPrize) {
-        return res.status(400).json({msg:'Vui long nhap day du cac field'})
+    if (!toppName || !toppPrize) {
+        return res.status(400).json({ msg: 'Vui long nhap day du cac field' })
     }
     Topping.findById(req.params.id, (err, topping) => {
         // console.log(toppName)

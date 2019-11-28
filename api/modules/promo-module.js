@@ -45,9 +45,9 @@ router.put('/update/:id', (req, res) => {
 //add promo
 router.post('/add', (req, res) => {
     var id = mongoose.Types.ObjectId();
-    const { promo, desPromo } = req.body;
+    const { promoName, desPromo } = req.body;
     // console.log(promo);
-    if (promo === undefined || promo === '') {
+    if (promoName === undefined || promoName === '') {
         res.status(400).json({ msg: 'promo khong duoc de trong' })
     }
     if (desPromo === undefined || desPromo === null) {
@@ -55,8 +55,8 @@ router.post('/add', (req, res) => {
     }
     var pro = new Promo({
         _id: id,
-        toppName: req.body.toppName,
-        toppPrize: req.body.toppPrize,
+        promoName: req.body.promoName,
+        desPromo: req.body.promoPrize,
         isDeleted: false
     });
     pro.save().then(topping => {

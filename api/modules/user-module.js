@@ -139,4 +139,30 @@ router.post('/register', (req, res) => {
     })
 })
 
+//Update user
+router.put('/update/:id', (req, res) => {
+    const { userName, userAddress, userGender, userEmail, userPhone, userPassword } = req.body;
+    if (!userName || !userAddress || !userGender || !userEmail || !userPhone || !userPassword) {
+        return res.status(400).json({ msg: 'Vui long nhap day du cac field' })
+    }
+    User.findById(req.params.id, (err, user) => {
+        // console.log(toppName)
+        user.userName = req.body.userName
+        user.userAddress = req.body.userAddress
+        user.userGender = req.body.userGender
+        user.userEmail = req.body.userEmail
+        user.userPhone = req.body.userPhone
+        user.userPassword = req.body.userPassword
+        user.save().then(user => {
+            res.json('object updated successfully: ' + user);
+        }).catch(err => {
+            res.status(400).send("unable to update data: " + err);
+        });
+        // if (req.body.toppPrize !== undefined) {
+        //     topping.toppPrize = req.body.toppPrize
+        // }
+
+    })
+})
+
 module.exports = router;

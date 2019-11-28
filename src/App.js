@@ -20,6 +20,7 @@ import { Container } from 'react-bootstrap';
 import ProductList from './components/admin/product/productList';
 import UserList from './components/admin/user/userList';
 import ToppingList from './components/admin/topping/toppList';
+import PromoList from './components/admin/promo/promoList';
 import ToppingDetail from './components/admin/topping/toppDetail';
 import ProductDetail from './components/admin/product/productDetail';
 import EditProduct from './components/admin/product/editProduct';
@@ -50,6 +51,7 @@ class App extends Component {
               <Route path="/admin/users" component={UserList}></Route>
               <Route path="/admin/toppings/:id" component={ToppingDetail}></Route>
               <Route path="/admin/toppings" component={ToppingList}></Route>
+              <Route path="/admin/promos" component={PromoList}></Route>
              
               <UserRoute path="/account" component={Usercontent} />
               {/* <PrivateRoute path="/admin/orders/:id" component={OrderDetail}/>
