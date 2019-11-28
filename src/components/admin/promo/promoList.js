@@ -48,7 +48,7 @@ export class PromoList extends Component {
 						_id: pro._id,
 						promoName: pro.promoName,
 						desPromo: pro.desPromo,
-						isDeleted: pro.isDeleted ? 'Deleted' : 'Good'
+						isDeleted: pro.isDeleted === "true" ? 'Deleted' : 'Good'
 					}
 					newPromos = [...newPromos, newPromo];
 				});
@@ -94,11 +94,11 @@ export class PromoList extends Component {
 											onClick={(event) => props.action.handleAdd(event, props.data)}
 											color="primary"
 											variant="contained"
-											style={{ textTransform: 'none', color: 'green' }}
+											
 											size="small"
 										>
 											<Link to={`/admin/Promos/${data._id}`}>
-												<DetailsIcon />
+												<DetailsIcon style={{ textTransform: 'none', color: 'green' }} />
 											</Link>
 
 										</IconButton>

@@ -23,13 +23,13 @@ export class ProductList extends Component {
         super(props)
         this.state = {
             columns: [
-                // { title: 'ID', field: '_id' },
+                { title: 'ID', field: '_id' },
                 { title: 'Product Name', field: 'prodName' },
                 { title: 'Product Prize', field: 'prodPrize' },
                 { title: 'Status', field: 'isDeleted' }
 
             ],
-            data: [],
+            data: []
         }
     }
 
@@ -61,11 +61,14 @@ export class ProductList extends Component {
                 console.log(this.state.columns)
                 console.log(this.state.data)
             })
-    }
 
+    }
     render() {
         const { data } = this.state;
-        console.log(this.state.data);
+        const _id = data.map(product => {
+            const{_id} = product;
+        })
+        console.log(_id)
         if (data.length > 0) {
             return (
                 <div>
@@ -97,10 +100,11 @@ export class ProductList extends Component {
                                             onClick={(event) => props.action.handleAdd(event, props.data)}
                                             color="primary"
                                             variant="contained"
-                                            style={{ textTransform: 'none', color: 'green' }}
-                                            size="small"
-                                        >
-                                            <DetailsIcon />
+
+                                            size="small">
+                                            <Link to={`/admin/products/${_id}`} style={{ textTransform: 'none', color: 'green' }}>
+                                                <DetailsIcon />
+                                            </Link>
                                         </IconButton>
                                         <IconButton
                                             onClick={(event) => props.action.handleUpdate(event, props.data)}
@@ -127,11 +131,10 @@ export class ProductList extends Component {
                             }}
                         />
                     </Grow>
-
-
                 </div>
             )
         }
+        //end return
         else {
             return (
                 <Container>
