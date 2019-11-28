@@ -80,11 +80,11 @@ class NavigationBar extends Component {
             <div>
                 <Navbar bg="light" expand="lg">
                     <Navbar.Brand>
-                        <strong>
+                        
                             <Link to='/home'>
-                                Umbreon
+                            <strong> Umbreon</strong>
                         </Link>
-                        </strong>
+                        
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">

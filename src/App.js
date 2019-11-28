@@ -11,7 +11,7 @@ import MainContent from './components/mainContent';
 import AccessDenied from './components/accessDenied';
 import Usercontent from './components/user/usercontent'
 import Tst from './components/tst'
-
+import CheckoutScreenKai from './components/order/checkoutScreenKai'
 import { loadUser } from './actions/authAction';
 import { getCartItems } from './actions/cartAction';
 import { Route, Switch, Redirect } from 'react-router-dom';

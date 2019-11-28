@@ -6,7 +6,6 @@ const Product = require('../models/product-model');
 router.get('/:id', (req, res) => {
     Product.findById(req.params.id, (err, product) => {
         if (err) {
-            console.log(err)
             res.status(400).json({ msg: `something gone wrong: ${err}` })
         }
         // console.log(req.params.id);
@@ -50,7 +49,6 @@ router.put('/update/:id', (req, res) => {
         })
 
     })
-    
 })
 
 //Có thể là delete :))
