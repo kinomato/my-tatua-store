@@ -16,7 +16,8 @@ export class Checkoutv2 extends Component {
                     // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
                     onSuccess={(details, data) => {
                         alert("Transaction completed by " + details.payer.name.given_name);
-
+                        console.log(details);
+                        console.log(data);
                         // OPTIONAL: Call your server to save the transaction
                         return fetch("/paypal-transaction-complete", {
                             method: "post",

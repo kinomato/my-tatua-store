@@ -52,7 +52,7 @@ class App extends Component {
               <Route path="/admin/toppings/:id" component={ToppingDetail}></Route>
               <Route path="/admin/toppings" component={ToppingList}></Route>
               <Route path="/admin/promos" component={PromoList}></Route>
-             
+              <UserRoute path="/cart/checkout"  component={CheckoutScreenKai}/>
               <UserRoute path="/account" component={Usercontent} />
               {/* <PrivateRoute path="/admin/orders/:id" component={OrderDetail}/>
               <PrivateRoute path="/admin/orders" component={Order}/>

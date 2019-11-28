@@ -15,7 +15,7 @@ export class checkoutButton extends Component {
     }
     Redirect = () => {
         const {history} = this.props;
-        if(history) history.push('/checkoutscreen');
+        if(history) history.push('/cart/checkout');
     }
     handleLoginKick = () => {
         this.setState({
